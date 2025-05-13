@@ -11,6 +11,10 @@ interface OrderButtonProps {
 
 const OrderButton: React.FC<OrderButtonProps> = ({ className = '', onClick, scrollToMenu = false }) => {
   const handleClick = (e: React.MouseEvent) => {
+    console.log('OrderButton clicked');
+    console.log('ScrollToMenu:', scrollToMenu);
+    console.log('Current URL:', window.location.href);
+
     if (scrollToMenu) {
       // Scroll to menu section
       const menuSection = document.getElementById('menu');
@@ -21,7 +25,13 @@ const OrderButton: React.FC<OrderButtonProps> = ({ className = '', onClick, scro
       // Prevent default link behavior
       e.preventDefault();
       // Navigate to order page
-      window.location.href = '/ordenar';
+      console.log('Attempting to navigate to /ordenar');
+      try {
+        window.location.href = '/ordenar';
+      } catch (error) {
+        console.error('Navigation error:', error);
+        alert('Error al navegar: ' + error.message);
+      }
     }
     
     // Call additional onClick handler if provided
