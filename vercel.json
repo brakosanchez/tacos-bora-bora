@@ -21,6 +21,10 @@
       "src": "/ordenar",
       "dest": "/ordenar",
       "continue": true
+    },
+    {
+      "src": "/ordenar/(.*)",
+      "dest": "/ordenar"
     }
   ],
   "headers": [
