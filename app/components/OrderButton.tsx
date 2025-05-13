@@ -10,37 +10,28 @@ interface OrderButtonProps {
 }
 
 const OrderButton: React.FC<OrderButtonProps> = ({ className = '', onClick, scrollToMenu = false }) => {
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
     if (scrollToMenu) {
       // Scroll to menu section
       const menuSection = document.getElementById('menu');
       if (menuSection) {
         menuSection.scrollIntoView({ behavior: 'smooth' });
       }
+    } else {
+      // Prevent default link behavior
+      e.preventDefault();
+      // Navigate to order page
+      window.location.href = '/ordenar';
     }
     
     // Call additional onClick handler if provided
     if (onClick) onClick();
   };
 
-  if (scrollToMenu) {
-    return (
-      <button
-        onClick={handleClick}
-        className={`font-unbounded bg-gradient-to-r from-bora-red to-bora-orange 
-                   px-8 py-3 rounded-lg text-xl shadow-lg 
-                   hover:from-bora-orange hover:to-bora-red transition-all duration-300
-                   border-2 border-bora-yellow/30 hover:animate-heat-wave
-                   hover:shadow-bora-orange/50 hover:shadow-2xl ${className}`}
-      >
-        ¡Ordena Ahora!
-      </button>
-    );
-  }
-
   return (
     <Link
       href="/ordenar"
+      onClick={handleClick}
       className={`font-unbounded bg-gradient-to-r from-bora-red to-bora-orange 
                  px-8 py-3 rounded-lg text-xl shadow-lg 
                  hover:from-bora-orange hover:to-bora-red transition-all duration-300
