@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 interface OrderButtonProps {
   className?: string;
@@ -9,6 +10,8 @@ interface OrderButtonProps {
 }
 
 const OrderButton: React.FC<OrderButtonProps> = ({ className = '', onClick, scrollToMenu = false }) => {
+  const router = useRouter();
+
   const handleClick = () => {
     if (scrollToMenu) {
       // Scroll to menu section
@@ -18,7 +21,7 @@ const OrderButton: React.FC<OrderButtonProps> = ({ className = '', onClick, scro
       }
     } else {
       // Navigate to order page
-      window.location.href = '/ordenar';
+      router.push('/ordenar');
     }
     
     // Call additional onClick handler if provided
