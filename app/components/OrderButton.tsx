@@ -1,28 +1,16 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface OrderButtonProps {
   className?: string;
 }
 
 const OrderButton: React.FC<OrderButtonProps> = ({ className = '' }) => {
-  const router = useRouter();
-
-  const handleClick = () => {
-    try {
-      router.push('/ordenar');
-    } catch (error) {
-      console.error('Navigation error:', error);
-      alert(`Error al navegar: ${error instanceof Error ? error.message : 'Unknown error'}`);
-    }
-  };
-
   return (
-    <button
-      type="button"
-      onClick={handleClick}
+    <Link
+      href="/ordenar"
       className={`font-unbounded bg-gradient-to-r from-bora-red to-bora-orange 
                  px-8 py-3 rounded-lg text-xl shadow-lg 
                  hover:from-bora-orange hover:to-bora-red transition-all duration-300
@@ -30,7 +18,7 @@ const OrderButton: React.FC<OrderButtonProps> = ({ className = '' }) => {
                  hover:shadow-bora-orange/50 hover:shadow-2xl ${className}`}
     >
       ¡Ordena Ahora!
-    </button>
+    </Link>
   );
 };
 
