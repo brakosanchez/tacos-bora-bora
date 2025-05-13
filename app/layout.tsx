@@ -24,7 +24,7 @@ const unbounded = Unbounded({
 export const metadata = {
   title: 'Tacos Bora Bora',
   description: 'La mejor taquería con auténtico sabor tropical',
-  metadataBase: new URL('https://tacosborabora.com'),
+  metadataBase: new URL('https://www.tacosborabora.com'),
   icons: {
     icon: '/images/favicon.png',
     shortcut: '/images/favicon.png',
@@ -33,7 +33,7 @@ export const metadata = {
   openGraph: {
     title: 'Tacos Bora Bora',
     description: 'La mejor taquería con auténtico sabor tropical',
-    url: 'https://tacosborabora.com',
+    url: 'https://www.tacosborabora.com',
     siteName: 'Tacos Bora Bora',
     images: [
       {
