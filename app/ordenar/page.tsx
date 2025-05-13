@@ -15,12 +15,15 @@ interface OrderFormData {
 }
 
 const menuItems = [
-  { id: 1, nombre: 'Taco de Mixiote', precio: 30, categoria: 'Tacos' },
-  { id: 2, nombre: 'Taco de Camarón', precio: 35, categoria: 'Tacos' },
-  { id: 3, nombre: 'Taco de Pescado', precio: 35, categoria: 'Tacos' },
-  { id: 4, nombre: 'Kilo de Mixiote', precio: 330, categoria: 'Especialidades' },
-  { id: 5, nombre: 'Mixiote de Pollo', precio: 180, categoria: 'Especialidades' },
-  { id: 6, nombre: 'Mixiote de Res', precio: 200, categoria: 'Especialidades' },
+  { id: 1, nombre: 'Bistec', precio: 30, categoria: 'Tacos', descripcion: 'Jugosa carne de res marinada' },
+  { id: 2, nombre: 'Longaniza', precio: 30, categoria: 'Tacos', descripcion: 'Auténtica longaniza artesanal' },
+  { id: 3, nombre: 'Pollo', precio: 30, categoria: 'Tacos', descripcion: 'Pollo marinado a la plancha' },
+  { id: 4, nombre: 'Aguja Norteña', precio: 30, categoria: 'Tacos', descripcion: 'Corte especial de res' },
+  { id: 5, nombre: 'Campechano', precio: 30, categoria: 'Tacos', descripcion: 'Combinación de longaniza con bistec o pollo' },
+  { id: 6, nombre: 'Mixiote', precio: 30, categoria: 'Tacos', descripcion: 'Tradicional mixiote de res' },
+  { id: 7, nombre: 'Cecina', precio: 35, categoria: 'Especialidades', descripcion: 'Fina cecina de res' },
+  { id: 8, nombre: 'Arrachera', precio: 35, categoria: 'Especialidades', descripcion: 'Corte premium de arrachera' },
+  { id: 9, nombre: 'Kilo de Mixiote', precio: 330, categoria: 'Especialidades', descripcion: 'Mixiote de res para toda la familia' },
 ];
 
 export default function OrderPage() {
