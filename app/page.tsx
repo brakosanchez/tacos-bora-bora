@@ -43,7 +43,7 @@ export default function Home() {
             <p className="font-yeseva text-2xl md:text-4xl mb-8 text-transparent bg-gradient-to-r from-bora-orange via-bora-yellow to-bora-red bg-clip-text animate-float">
               No te quedes con el antojo
             </p>
-            <OrderButton scrollToMenu={true} />
+            <OrderButton />
           </div>
         </div>
 
