@@ -15,10 +15,12 @@ interface OrderFormData {
 }
 
 const menuItems = [
-  { id: 1, nombre: 'Taco de Mixiote', precio: 30 },
-  { id: 2, nombre: 'Taco de Pastor', precio: 25 },
-  { id: 3, nombre: 'Taco de Suadero', precio: 25 },
-  { id: 4, nombre: 'Kilo de Mixiote', precio: 330 },
+  { id: 1, nombre: 'Taco de Mixiote', precio: 30, categoria: 'Tacos' },
+  { id: 2, nombre: 'Taco de Camarón', precio: 35, categoria: 'Tacos' },
+  { id: 3, nombre: 'Taco de Pescado', precio: 35, categoria: 'Tacos' },
+  { id: 4, nombre: 'Kilo de Mixiote', precio: 330, categoria: 'Especialidades' },
+  { id: 5, nombre: 'Mixiote de Pollo', precio: 180, categoria: 'Especialidades' },
+  { id: 6, nombre: 'Mixiote de Res', precio: 200, categoria: 'Especialidades' },
 ];
 
 export default function OrderPage() {
