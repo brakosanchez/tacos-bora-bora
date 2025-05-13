@@ -9,6 +9,23 @@ const nextConfig = {
   images: {
     domains: ['www.tacosborabora.com', 'tacos-bora-bora.vercel.app']
   },
+  async rewrites() {
+    return [
+      {
+        source: '/ordenar',
+        destination: '/ordenar'
+      }
+    ];
+  },
+  async redirects() {
+    return [
+      {
+        source: '/ordenar',
+        destination: '/ordenar',
+        permanent: false
+      }
+    ];
+  }
 }
 
 module.exports = nextConfig
