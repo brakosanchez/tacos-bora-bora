@@ -39,6 +39,17 @@ export default function OrderPage() {
     [key: number]: { cantidad: number; notas: string };
   }>({});
 
+  const salsas = [
+    'Piña',
+    'Piña con habanero',
+    'Cebollas moradas',
+    'Nopales',
+    'Salsa verde',
+    'Salsa roja',
+    'Salsa de habanero',
+    'Chimichurri'
+  ];
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -168,88 +179,65 @@ export default function OrderPage() {
                   type="text"
                   id="nombre"
                   name="nombre"
-                  required
                   value={formData.nombre}
                   onChange={handleInputChange}
-                  className={`mt-1 block w-full rounded-md shadow-sm focus:ring-orange-500 ${formErrors.nombre ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-orange-500'}`}
+                  required
+                  className="w-full bg-bora-black/30 border border-bora-orange/20 rounded-lg px-4 py-3 text-bora-white focus:outline-none focus:border-bora-yellow transition-colors"
                 />
-                {formErrors.nombre && (
-                  <p className="mt-1 text-sm text-red-600">{formErrors.nombre}</p>
-                )}
               </div>
               <div>
-                <label htmlFor="telefono" className="block text-sm font-medium text-gray-700">
-                  Teléfono
-                </label>
+                <label htmlFor="telefono" className="block text-sm font-medium text-bora-white/70 mb-2">Teléfono</label>
                 <input
                   type="tel"
                   id="telefono"
                   name="telefono"
-                  required
                   value={formData.telefono}
                   onChange={handleInputChange}
-                  placeholder="Ej. 5512345678"
-                  className={`mt-1 block w-full rounded-md shadow-sm focus:ring-orange-500 ${formErrors.telefono ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-orange-500'}`}
+                  required
+                  className="w-full bg-bora-black/30 border border-bora-orange/20 rounded-lg px-4 py-3 text-bora-white focus:outline-none focus:border-bora-yellow transition-colors"
                 />
-                {formErrors.telefono && (
-                  <p className="mt-1 text-sm text-red-600">{formErrors.telefono}</p>
-                )}
               </div>
             </div>
+
+            {/* Delivery Address */}
             <div>
-              <label htmlFor="direccion" className="block text-sm font-medium text-gray-700">
-                Dirección de entrega
-              </label>
+              <label htmlFor="direccion" className="block text-sm font-medium text-bora-white/70 mb-2">Dirección de Entrega</label>
               <textarea
                 id="direccion"
                 name="direccion"
-                required
                 value={formData.direccion}
                 onChange={handleInputChange}
-                rows={3}
-                className={`mt-1 block w-full rounded-md shadow-sm focus:ring-orange-500 ${formErrors.direccion ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-orange-500'}`}
+                required
+                className="w-full bg-bora-black/30 border border-bora-orange/20 rounded-lg px-4 py-3 text-bora-white focus:outline-none focus:border-bora-yellow transition-colors h-24"
               />
-              {formErrors.direccion && (
-                <p className="mt-1 text-sm text-red-600">{formErrors.direccion}</p>
-              )}
             </div>
-          </div>
 
-          {/* Selección de items */}
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-gray-800">Tu Orden</h2>
-            <div className="space-y-4">
+            {/* Menu Items */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {menuItems.map((item) => (
-                <div key={item.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 border rounded-lg">
-                  <div className="flex-grow">
-                    <h3 className="font-medium text-gray-900">{item.nombre}</h3>
-                    <p className="text-gray-500">${item.precio}</p>
+                <div key={item.id} className="bg-bora-black/30 backdrop-blur-sm rounded-lg p-6 border border-bora-orange/20 hover:border-bora-yellow transition-colors">
+                  <div className="flex justify-between items-start mb-4">
+                    <h4 className="font-unbounded text-bora-white text-lg">{item.nombre}</h4>
+                    <span className="font-bebas text-xl text-bora-yellow">${item.precio}</span>
                   </div>
-                  <div className="flex gap-4 items-center">
-                    <div>
-                      <label htmlFor={`cantidad-${item.id}`} className="sr-only">
-                        Cantidad
-                      </label>
-                      <input
-                        type="number"
-                        id={`cantidad-${item.id}`}
-                        min="0"
-                        value={selectedItems[item.id]?.cantidad || 0}
-                        onChange={(e) => handleItemChange(item.id, 'cantidad', parseInt(e.target.value) || 0)}
-                        className="w-20 rounded-md border-gray-300 shadow-sm focus:border-orange-500"
-                      />
-                    </div>
-                    <div className="flex-grow">
-                      <label htmlFor={`notas-${item.id}`} className="sr-only">
-                        Notas especiales
-                      </label>
-                      <input
-                        type="text"
-                        id={`notas-${item.id}`}
-                        placeholder="Notas especiales"
-                        value={selectedItems[item.id]?.notas || ''}
-                        onChange={(e) => handleItemChange(item.id, 'notas', e.target.value)}
-                        className="w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500"
+                  <div className="flex items-center mb-3">
+                    <label className="text-bora-white/70 mr-2">Cantidad:</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={selectedItems[item.id]?.cantidad || 0}
+                      onChange={(e) => handleItemChange(item.id, 'cantidad', e.target.value)}
+                      className="w-20 bg-bora-black/30 border border-bora-orange/20 rounded-lg px-2 py-1 text-bora-white focus:outline-none focus:border-bora-yellow"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-bora-white/70 mb-2">Notas:</label>
+                    <textarea
+                      value={selectedItems[item.id]?.notas || ''}
+                      onChange={(e) => handleItemChange(item.id, 'notas', e.target.value)}
+                      className="w-full bg-bora-black/30 border border-bora-orange/20 rounded-lg px-4 py-2 text-bora-white focus:outline-none focus:border-bora-yellow h-20"
+                      placeholder="Instrucciones especiales"
+                    />
                       />
                     </div>
                   </div>
