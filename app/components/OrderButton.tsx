@@ -1,18 +1,27 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 interface OrderButtonProps {
   className?: string;
   onClick?: () => void;
+  scrollToMenu?: boolean;
 }
 
-const OrderButton: React.FC<OrderButtonProps> = ({ className = '', onClick }) => {
+const OrderButton: React.FC<OrderButtonProps> = ({ className = '', onClick, scrollToMenu = false }) => {
+  const router = useRouter();
+
   const handleClick = () => {
-    // Scroll to menu section
-    const menuSection = document.getElementById('menu');
-    if (menuSection) {
-      menuSection.scrollIntoView({ behavior: 'smooth' });
+    if (scrollToMenu) {
+      // Scroll to menu section
+      const menuSection = document.getElementById('menu');
+      if (menuSection) {
+        menuSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Navigate to order page
+      router.push('/ordenar');
     }
     
     // Call additional onClick handler if provided
