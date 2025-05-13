@@ -160,21 +160,42 @@ export default function OrderPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-100 to-orange-200 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-6">
-        <h1 className="text-3xl font-bold text-orange-600 mb-8 text-center">
-          Realiza tu Pedido
-        </h1>
+    <main className="min-h-screen">
+      {/* Background layers */}
+      <div className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center">
+        {/* Overlay gradients */}
+        <div className="absolute inset-0 bg-gradient-to-b from-bora-orange/20 via-transparent to-bora-brown/40"></div>
+      </div>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
-          {/* Información personal */}
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-gray-800">Información de Contacto</h2>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {/* Content */}
+      <div className="relative z-10 text-white px-4 py-16">
+        <div className="max-w-4xl mx-auto bg-bora-black/30 backdrop-blur-sm p-8 rounded-2xl shadow-2xl border border-bora-orange/20">
+          <div className="text-center mb-12">
+            <h1 className="font-bebas text-5xl md:text-7xl tracking-wider text-transparent bg-gradient-to-r from-bora-yellow via-bora-red to-bora-orange bg-clip-text animate-shimmer bg-[length:200%_auto]">
+              Haz tu Pedido
+            </h1>
+            <p className="font-yeseva text-2xl md:text-3xl mb-6 text-bora-yellow/90 animate-float">
+              Elige tus tacos favoritos
+            </p>
+          </div>
+
+          {/* Salsas Section */}
+          <div className="mb-8 bg-bora-black/30 backdrop-blur-sm rounded-lg p-4 border border-bora-orange/20">
+            <p className="text-bora-white/70 text-sm mb-2">Todas nuestras salsas hechas en casa:</p>
+            <div className="flex flex-wrap gap-2">
+              {salsas.map((salsa) => (
+                <span key={salsa} className="text-bora-yellow/90 text-sm bg-bora-black/30 px-2 py-1 rounded-full border border-bora-orange/20">
+                  {salsa}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Personal Information */}
+            <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="nombre" className="block text-sm font-medium text-gray-700">
-                  Nombre completo
-                </label>
+                <label htmlFor="nombre" className="block text-sm font-medium text-bora-white/70 mb-2">Nombre</label>
                 <input
                   type="text"
                   id="nombre"
@@ -238,31 +259,22 @@ export default function OrderPage() {
                       className="w-full bg-bora-black/30 border border-bora-orange/20 rounded-lg px-4 py-2 text-bora-white focus:outline-none focus:border-bora-yellow h-20"
                       placeholder="Instrucciones especiales"
                     />
-                      />
-                    </div>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
 
-          {/* Total y botón de envío */}
-          <div className="pt-4 border-t border-gray-200">
-            <div className="flex justify-between items-center mb-4">
-              <span className="text-lg font-semibold text-gray-900">Total:</span>
-              <span className="text-2xl font-bold text-orange-600">
-                ${calculateTotal()}
-              </span>
+            <div className="text-center mt-8">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="font-unbounded bg-gradient-to-r from-bora-red to-bora-orange px-8 py-4 rounded-lg text-xl shadow-lg hover:from-bora-orange hover:to-bora-red transition-all duration-300 border-2 border-bora-yellow/30 hover:animate-heat-wave hover:shadow-bora-orange/50 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? 'Enviando...' : 'Confirmar Pedido'}
+              </button>
             </div>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={`w-full text-white py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors ${isSubmitting ? 'bg-orange-400 cursor-not-allowed' : 'bg-orange-600 hover:bg-orange-700 focus:ring-orange-500'}`}
-            >
-              {isSubmitting ? 'Enviando pedido...' : 'Confirmar Pedido'}
-            </button>
-            {formErrors.items && (
-              <p className="mt-4 text-center text-sm text-red-600">{formErrors.items}</p>
+          </form>
+        </div>
             )}
           </div>
         </form>
