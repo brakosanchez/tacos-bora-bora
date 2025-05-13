@@ -160,7 +160,7 @@ export default function OrderPage() {
   };
 
   return (
-    <main className="min-h-screen">
+    <div className="min-h-screen">
       {/* Background layers */}
       <div className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center">
         {/* Overlay gradients */}
@@ -264,20 +264,23 @@ export default function OrderPage() {
               ))}
             </div>
 
+            {/* Submit Button */}
             <div className="text-center mt-8">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="font-unbounded bg-gradient-to-r from-bora-red to-bora-orange px-8 py-4 rounded-lg text-xl shadow-lg hover:from-bora-orange hover:to-bora-red transition-all duration-300 border-2 border-bora-yellow/30 hover:animate-heat-wave hover:shadow-bora-orange/50 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed"
+                className="font-unbounded bg-gradient-to-r from-bora-red to-bora-orange 
+                  px-8 py-4 rounded-lg text-xl shadow-lg 
+                  hover:from-bora-orange hover:to-bora-red transition-all duration-300
+                  border-2 border-bora-yellow/30 hover:animate-heat-wave
+                  hover:shadow-bora-orange/50 hover:shadow-2xl
+                  disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Enviando...' : 'Confirmar Pedido'}
               </button>
             </div>
           </form>
         </div>
-            )}
-          </div>
-        </form>
       </div>
     </div>
   );
