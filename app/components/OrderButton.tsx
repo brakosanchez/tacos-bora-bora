@@ -22,7 +22,14 @@ const OrderButton: React.FC<OrderButtonProps> = ({ className = '', onClick, scro
     } else {
       // Navigate to order page
       console.log('Navigating to /ordenar');
-      window.location.href = '/ordenar';
+      console.log('Current URL:', window.location.href);
+      console.log('Current pathname:', window.location.pathname);
+      try {
+        window.location.href = '/ordenar';
+      } catch (error) {
+        console.error('Navigation error:', error);
+        alert('Error al navegar: ' + error.message);
+      }
     }
     
     // Call additional onClick handler if provided
