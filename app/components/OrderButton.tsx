@@ -17,7 +17,7 @@ const OrderButton: React.FC<OrderButtonProps> = ({ className = '' }) => {
                  border-2 border-bora-yellow/30 hover:animate-heat-wave
                  hover:shadow-bora-orange/50 hover:shadow-2xl ${className}`}
     >
-      ¡Ordena Ahora!
+      Ordena Ahora!
     </Link>
   );
 };
