@@ -11,6 +11,12 @@
       "permanent": true
     }
   ],
+  "routes": [
+    {
+      "src": "/ordenar",
+      "dest": "/ordenar"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
