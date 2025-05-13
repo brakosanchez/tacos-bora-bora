@@ -52,8 +52,51 @@ export default function OrderPage() {
     }));
   };
 
+  const [formErrors, setFormErrors] = useState<{[key: string]: string}>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validateForm = () => {
+    const errors: {[key: string]: string} = {};
+
+    // Validar nombre
+    if (!formData.nombre.trim()) {
+      errors.nombre = 'El nombre es requerido';
+    }
+
+    // Validar teléfono (formato mexicano)
+    const phoneRegex = /^(\+?52)?([ -]?)\d{10}$/;
+    if (!formData.telefono.trim()) {
+      errors.telefono = 'El teléfono es requerido';
+    } else if (!phoneRegex.test(formData.telefono)) {
+      errors.telefono = 'Número de teléfono inválido';
+    }
+
+    // Validar dirección
+    if (!formData.direccion.trim()) {
+      errors.direccion = 'La dirección es requerida';
+    }
+
+    // Validar que haya al menos un item
+    const orderItems = Object.entries(selectedItems)
+      .filter(([_, details]) => details.cantidad > 0);
+    
+    if (orderItems.length === 0) {
+      errors.items = 'Debes seleccionar al menos un producto';
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    // Validar formulario
+    if (!validateForm()) {
+      setIsSubmitting(false);
+      return;
+    }
     
     // Preparar items del pedido
     const orderItems = Object.entries(selectedItems)
@@ -63,22 +106,34 @@ export default function OrderPage() {
         return {
           nombre: item?.nombre || '',
           cantidad: details.cantidad,
-          notas: details.notas
+          precio: item?.precio || 0,
+          notas: details.notas || ''
         };
       });
 
     const orderData = {
       ...formData,
       items: orderItems,
+      total: calculateTotal(),
       fecha: new Date().toISOString(),
     };
 
-    // Aquí iría la lógica para enviar el pedido
-    console.log('Pedido:', orderData);
-    
-    // Por ahora solo mostraremos una alerta
-    alert('¡Gracias por tu pedido! Te contactaremos pronto.');
-    router.push('/');
+    try {
+      // Simular envío de pedido
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // En un escenario real, aquí iría la llamada a una API
+      console.log('Pedido enviado:', orderData);
+      
+      // Mostrar confirmación
+      alert('¡Gracias por tu pedido! Te contactaremos pronto.');
+      router.push('/');
+    } catch (error) {
+      console.error('Error al enviar pedido:', error);
+      alert('Hubo un problema al enviar tu pedido. Por favor, intenta de nuevo.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const calculateTotal = () => {
@@ -111,8 +166,11 @@ export default function OrderPage() {
                   required
                   value={formData.nombre}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"
+                  className={`mt-1 block w-full rounded-md shadow-sm focus:ring-orange-500 ${formErrors.nombre ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-orange-500'}`}
                 />
+                {formErrors.nombre && (
+                  <p className="mt-1 text-sm text-red-600">{formErrors.nombre}</p>
+                )}
               </div>
               <div>
                 <label htmlFor="telefono" className="block text-sm font-medium text-gray-700">
@@ -125,8 +183,12 @@ export default function OrderPage() {
                   required
                   value={formData.telefono}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"
+                  placeholder="Ej. 5512345678"
+                  className={`mt-1 block w-full rounded-md shadow-sm focus:ring-orange-500 ${formErrors.telefono ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-orange-500'}`}
                 />
+                {formErrors.telefono && (
+                  <p className="mt-1 text-sm text-red-600">{formErrors.telefono}</p>
+                )}
               </div>
             </div>
             <div>
@@ -140,8 +202,11 @@ export default function OrderPage() {
                 value={formData.direccion}
                 onChange={handleInputChange}
                 rows={3}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"
+                className={`mt-1 block w-full rounded-md shadow-sm focus:ring-orange-500 ${formErrors.direccion ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-orange-500'}`}
               />
+              {formErrors.direccion && (
+                <p className="mt-1 text-sm text-red-600">{formErrors.direccion}</p>
+              )}
             </div>
           </div>
 
@@ -166,7 +231,7 @@ export default function OrderPage() {
                         min="0"
                         value={selectedItems[item.id]?.cantidad || 0}
                         onChange={(e) => handleItemChange(item.id, 'cantidad', parseInt(e.target.value) || 0)}
-                        className="w-20 rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"
+                        className="w-20 rounded-md border-gray-300 shadow-sm focus:border-orange-500"
                       />
                     </div>
                     <div className="flex-grow">
@@ -179,7 +244,7 @@ export default function OrderPage() {
                         placeholder="Notas especiales"
                         value={selectedItems[item.id]?.notas || ''}
                         onChange={(e) => handleItemChange(item.id, 'notas', e.target.value)}
-                        className="w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"
+                        className="w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500"
                       />
                     </div>
                   </div>
@@ -198,10 +263,14 @@ export default function OrderPage() {
             </div>
             <button
               type="submit"
-              className="w-full bg-orange-600 text-white py-3 px-4 rounded-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors"
+              disabled={isSubmitting}
+              className={`w-full text-white py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors ${isSubmitting ? 'bg-orange-400 cursor-not-allowed' : 'bg-orange-600 hover:bg-orange-700 focus:ring-orange-500'}`}
             >
-              Confirmar Pedido
+              {isSubmitting ? 'Enviando pedido...' : 'Confirmar Pedido'}
             </button>
+            {formErrors.items && (
+              <p className="mt-4 text-center text-sm text-red-600">{formErrors.items}</p>
+            )}
           </div>
         </form>
       </div>
