@@ -21,6 +21,7 @@ const OrderButton: React.FC<OrderButtonProps> = ({ className = '', onClick, scro
       }
     } else {
       // Navigate to order page
+      console.log('Navigating to /ordenar');
       router.push('/ordenar');
     }
     
