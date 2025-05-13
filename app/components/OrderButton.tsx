@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 
 interface OrderButtonProps {
   className?: string;
@@ -10,11 +9,7 @@ interface OrderButtonProps {
 }
 
 const OrderButton: React.FC<OrderButtonProps> = ({ className = '', onClick, scrollToMenu = false }) => {
-  const handleClick = (e: React.MouseEvent) => {
-    console.log('OrderButton clicked');
-    console.log('ScrollToMenu:', scrollToMenu);
-    console.log('Current URL:', window.location.href);
-
+  const handleClick = () => {
     if (scrollToMenu) {
       // Scroll to menu section
       const menuSection = document.getElementById('menu');
@@ -22,16 +17,8 @@ const OrderButton: React.FC<OrderButtonProps> = ({ className = '', onClick, scro
         menuSection.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      // Prevent default link behavior
-      e.preventDefault();
       // Navigate to order page
-      console.log('Attempting to navigate to /ordenar');
-      try {
-        window.location.href = '/ordenar';
-      } catch (error) {
-        console.error('Navigation error:', error);
-        alert('Error al navegar: ' + error.message);
-      }
+      window.location.href = '/ordenar';
     }
     
     // Call additional onClick handler if provided
@@ -39,8 +26,7 @@ const OrderButton: React.FC<OrderButtonProps> = ({ className = '', onClick, scro
   };
 
   return (
-    <Link
-      href="/ordenar"
+    <button
       onClick={handleClick}
       className={`font-unbounded bg-gradient-to-r from-bora-red to-bora-orange 
                  px-8 py-3 rounded-lg text-xl shadow-lg 
@@ -49,7 +35,7 @@ const OrderButton: React.FC<OrderButtonProps> = ({ className = '', onClick, scro
                  hover:shadow-bora-orange/50 hover:shadow-2xl ${className}`}
     >
       ¡Ordena Ahora!
-    </Link>
+    </button>
   );
 };
 
