@@ -2,6 +2,8 @@
 
 Bienvenido al repositorio de Tacos Bora Bora, una taquería única que combina el auténtico sabor mexicano con un ambiente tropical.
 
+<!-- Trigger Vercel Deployment -->
+
 ## 🚀 Características
 
 - Diseño moderno y responsivo
