@@ -49,12 +49,13 @@ export default function UbicacionPage() {
               </div>
 
               {/* Map */}
-              <div className="h-96 bg-bora-black/50 rounded-lg border border-bora-orange/20 overflow-hidden">
+              <div className="w-full h-96 rounded-2xl overflow-hidden shadow-2xl">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3757.7!2d-99.0!3d19.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDQyJzAwLjAiTiA5OcKwMDAnMDAuMCJX!5e0!3m2!1ses!2smx!4v1620000000000!5m2!1ses!2smx"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3756.3325876305177!2d-99.10687412505789!3d19.719801986688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f3c5c9e4e24d%3A0x9c4c07d3a9c5b3a1!2sCalle%20Alondras%20410%2C%20Los%20Aguiluchos%2C%2055770%20Nextlalpan%2C%20M%C3%A9x.!5e0!3m2!1ses!2smx!4v1697594400000!5m2!1ses!2smx"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
+                  allowFullScreen={true}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
