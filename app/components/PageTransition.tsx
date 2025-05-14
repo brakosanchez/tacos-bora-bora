@@ -3,35 +3,23 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
 export default function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   return (
     <AnimatePresence mode="wait">
-      <motion.div 
-        key={pathname}
-        initial="initialState" 
-        animate="animateState" 
-        exit="exitState"
-        transition={{
-          duration: 0.75,
-        }}
-        variants={{
-          initialState: {
-            opacity: 0,
-            clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
-          },
-          animateState: {
-            opacity: 1,
-            clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
-          },
-          exitState: {
-            clipPath: "polygon(50% 0, 50% 0, 50% 100%, 50% 100%)",
-          },
-        }}
-        className="absolute inset-0"
-      >
+      {isLoading && (
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ 
@@ -43,6 +31,11 @@ export default function PageTransition({ children }: { children: React.ReactNode
               stiffness: 100 
             }
           }}
+          exit={{ 
+            opacity: 0, 
+            scale: 0.8,
+            transition: { duration: 0.3 }
+          }}
           className="fixed inset-0 z-50 flex items-center justify-center bg-bora-black/80 backdrop-blur-sm"
         >
           <Image 
@@ -53,6 +46,32 @@ export default function PageTransition({ children }: { children: React.ReactNode
             className="animate-pulse"
           />
         </motion.div>
+      )}
+
+      <motion.div 
+        key={pathname}
+        initial="initialState" 
+        animate="animateState" 
+        exit="exitState"
+        transition={{
+          duration: 0.5,
+        }}
+        variants={{
+          initialState: {
+            opacity: 0,
+            y: 50
+          },
+          animateState: {
+            opacity: 1,
+            y: 0
+          },
+          exitState: {
+            opacity: 0,
+            y: -50
+          },
+        }}
+        className="relative"
+      >
         {children}
       </motion.div>
     </AnimatePresence>
