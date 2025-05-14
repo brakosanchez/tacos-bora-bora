@@ -23,7 +23,7 @@ export default function PageTransition({ children }: { children: React.ReactNode
   const isHomePage = pathname === '/';
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="sync">
       {isLoading && (
         <motion.div 
           initial={{ opacity: 1, backgroundColor: 'black' }}
