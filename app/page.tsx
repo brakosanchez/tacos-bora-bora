@@ -53,9 +53,30 @@ export default function Home() {
                       animate-water"></div>
       </div>
 
-      {/* Menu Section */}
-      <section id="menu" className="relative bg-gradient-to-b from-bora-brown to-bora-black">
-        <Menu />
+      {/* Taco Showcase */}
+      <section id="tacos" className="relative bg-gradient-to-b from-bora-brown to-bora-black py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bebas text-white text-center mb-12">Nuestros Tacos</h2>
+          <div className="flex justify-center items-center space-x-8">
+            {[
+              { src: '/images/bistec.png', alt: 'Taco de Bistec' },
+              { src: '/images/longaniza .png', alt: 'Taco de Longaniza' },
+              { src: '/images/pollo.png', alt: 'Taco de Pollo' }
+            ].map((taco, index) => (
+              <div 
+                key={index} 
+                className="transform transition-all duration-500 hover:scale-110 hover:rotate-6 
+                  hover:drop-shadow-[0_0_20px_rgba(255,165,0,0.7)] animate-float"
+              >
+                <img 
+                  src={taco.src} 
+                  alt={taco.alt} 
+                  className="w-48 md:w-64 h-auto object-contain"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Contact Section */}
