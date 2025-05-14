@@ -55,9 +55,7 @@ export default function Menu() {
   return (
     <section className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl md:text-5xl font-bebas text-transparent bg-gradient-to-r from-bora-yellow via-bora-red to-bora-orange bg-clip-text text-center mb-12 animate-shimmer bg-[length:200%_auto] hover:animate-heat-wave">
-          Nuestro Menú
-        </h2>
+        <h1 className="text-5xl md:text-7xl font-bebas text-bora-yellow text-center mb-12 animate-float">¿De qué vas a echar taquito?</h1>
         
         {/* Tacos Section */}
         <div className="mb-16">
