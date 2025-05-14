@@ -26,25 +26,41 @@ export default function PageTransition({ children }: { children: React.ReactNode
             opacity: 1, 
             scale: 1,
             transition: { 
-              duration: 0.5,
-              type: "spring",
-              stiffness: 100 
+              duration: 1,
+              type: "tween",
+              ease: "easeInOut" 
             }
           }}
           exit={{ 
             opacity: 0, 
             scale: 0.8,
-            transition: { duration: 0.3 }
+            transition: { 
+              duration: 0.8,
+              type: "tween",
+              ease: "easeInOut" 
+            }
           }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-bora-black/80 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-bora-black/90 backdrop-blur-md"
         >
-          <Image 
-            src="/images/Logo.png" 
-            alt="Tacos Bora Bora Logo" 
-            width={200} 
-            height={200}
-            className="animate-pulse"
-          />
+          <motion.div
+            initial={{ opacity: 0.6 }}
+            animate={{ 
+              opacity: 1,
+              transition: {
+                duration: 1.5,
+                repeat: Infinity,
+                repeatType: "reverse"
+              }
+            }}
+          >
+            <Image 
+              src="/images/Logo.png" 
+              alt="Tacos Bora Bora Logo" 
+              width={200} 
+              height={200}
+              className="transition-all duration-1000"
+            />
+          </motion.div>
         </motion.div>
       )}
 
@@ -54,20 +70,25 @@ export default function PageTransition({ children }: { children: React.ReactNode
         animate="animateState" 
         exit="exitState"
         transition={{
-          duration: 0.5,
+          duration: 0.8,
+          type: "tween",
+          ease: "easeInOut"
         }}
         variants={{
           initialState: {
             opacity: 0,
-            y: 50
+            y: 100,
+            scale: 0.95
           },
           animateState: {
             opacity: 1,
-            y: 0
+            y: 0,
+            scale: 1
           },
           exitState: {
             opacity: 0,
-            y: -50
+            y: -100,
+            scale: 0.95
           },
         }}
         className="relative"
