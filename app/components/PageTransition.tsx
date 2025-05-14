@@ -5,28 +5,68 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
+const pageVariants = {
+  initial: { 
+    opacity: 0, 
+    x: '-10%', 
+    scale: 0.95,
+    rotateY: 15
+  },
+  in: { 
+    opacity: 1, 
+    x: 0, 
+    scale: 1,
+    rotateY: 0,
+    transition: {
+      duration: 0.7,
+      type: 'tween',
+      ease: 'anticipate'
+    }
+  },
+  out: { 
+    opacity: 0, 
+    x: '10%', 
+    scale: 0.95,
+    rotateY: -15,
+    transition: {
+      duration: 0.7,
+      type: 'tween',
+      ease: 'anticipate'
+    }
+  }
+};
+
+const loadingVariants = {
+  hidden: { 
+    opacity: 0, 
+    scale: 0.9 
+  },
+  visible: { 
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: 'tween',
+      duration: 0.8,
+      ease: 'easeInOut'
+    }
+  },
+  hover: { scale: 1.05 },
+  tap: { scale: 0.95 }
+};
+
 export default function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (isFirstLoad) {
-      // Primer carga de la página
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-        setIsFirstLoad(false);
-      }, 2000);
+    const loadingDuration = isFirstLoad ? 2000 : 1000;
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      if (isFirstLoad) setIsFirstLoad(false);
+    }, loadingDuration);
 
-      return () => clearTimeout(timer);
-    } else {
-      // Transiciones entre páginas
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
-
-      return () => clearTimeout(timer);
-    }
+    return () => clearTimeout(timer);
   }, [pathname, isFirstLoad]);
 
   return (
@@ -37,43 +77,21 @@ export default function PageTransition({ children }: { children: React.ReactNode
           animate={{ 
             opacity: 0.78, 
             backdropFilter: 'blur(8px)',
-            transition: { 
-              duration: 0.6,
-              type: "tween",
-              ease: "easeInOut" 
-            }
+            transition: { duration: 0.7, ease: 'easeInOut' }
           }}
           exit={{ 
             opacity: 0,
             backdropFilter: 'blur(0px)', 
-            transition: { 
-              duration: 0.6,
-              type: "tween",
-              ease: "easeInOut" 
-            }
+            transition: { duration: 0.7, ease: 'easeInOut' }
           }}
           className="fixed inset-0 z-50 flex items-center justify-center bg-bora-black"
         >
           <motion.div
-            initial={{ 
-              opacity: 0,
-              scale: 0.7,
-              y: 50
-            }}
-            animate={{ 
-              opacity: 1,
-              scale: 1,
-              y: 0,
-              transition: {
-                duration: 1,
-                type: "spring",
-                stiffness: 100,
-                damping: 8,
-                bounce: 0.5
-              }
-            }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            variants={loadingVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover="hover"
+            whileTap="tap"
           >
             <Image 
               src="/images/Logo.png" 
@@ -88,31 +106,10 @@ export default function PageTransition({ children }: { children: React.ReactNode
 
       <motion.div 
         key={pathname}
-        initial="initialState" 
-        animate="animateState" 
-        exit="exitState"
-        transition={{
-          duration: 0.6,
-          type: "tween",
-          ease: "easeInOut"
-        }}
-        variants={{
-          initialState: {
-            opacity: 0,
-            y: 50,
-            scale: 0.98
-          },
-          animateState: {
-            opacity: 1,
-            y: 0,
-            scale: 1
-          },
-          exitState: {
-            opacity: 0,
-            y: -50,
-            scale: 0.98
-          },
-        }}
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariants}
         className="relative"
       >
         {children}
