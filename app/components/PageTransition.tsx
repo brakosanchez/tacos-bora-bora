@@ -5,27 +5,13 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
-const loadingVariants = {
-  hidden: { 
-    opacity: 0 
-  },
-  visible: { 
-    opacity: 1,
-    transition: {
-      type: 'tween',
-      duration: 0.5,
-      ease: 'easeInOut'
-    }
-  }
-};
-
 export default function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const loadingDuration = isFirstLoad ? 1500 : 800;
+    const loadingDuration = isFirstLoad ? 2000 : 800;
     const timer = setTimeout(() => {
       setIsLoading(false);
       if (isFirstLoad) setIsFirstLoad(false);
@@ -38,21 +24,28 @@ export default function PageTransition({ children }: { children: React.ReactNode
     <AnimatePresence mode="wait">
       {isLoading && (
         <motion.div 
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 1, backgroundColor: 'black' }}
           animate={{ 
-            opacity: 0.78,
-            transition: { duration: 0.5, ease: 'easeInOut' }
+            opacity: [1, 1, 0],
+            transition: {
+              duration: 2,
+              times: [0, 0.9, 1],
+              ease: 'easeInOut'
+            }
           }}
-          exit={{ 
-            opacity: 0,
-            transition: { duration: 0.5, ease: 'easeInOut' }
-          }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-bora-black"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black"
         >
           <motion.div
-            variants={loadingVariants}
-            initial="hidden"
-            animate="visible"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ 
+              opacity: [0, 1, 1],
+              scale: [0.8, 1, 1],
+              transition: {
+                duration: 2,
+                times: [0, 0.3, 1],
+                ease: 'easeInOut'
+              }
+            }}
           >
             <Image 
               src="/images/Logo.png" 
