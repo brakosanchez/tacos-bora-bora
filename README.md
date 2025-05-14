@@ -11,7 +11,7 @@ Bienvenido al repositorio de Tacos Bora Bora, una taquería única que combina e
 
 - Diseño moderno y responsivo
 - Menú interactivo con precios actualizados
-- Sistema de autenticación para clientes y personal
+
 - Integración con mapas para ubicación
 - Formulario de contacto
 - Animaciones y efectos visuales tropicales
@@ -22,7 +22,7 @@ Bienvenido al repositorio de Tacos Bora Bora, una taquería única que combina e
 - TypeScript
 - Tailwind CSS
 - React
-- Google Maps API
+
 
 ## 📦 Instalación
 
