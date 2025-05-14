@@ -9,21 +9,11 @@
       "source": "http://tacosborabora.com",
       "destination": "https://www.tacosborabora.com",
       "permanent": true
-    },
-    {
-      "source": "/ordenar",
-      "destination": "/ordenar",
-      "permanent": false
     }
   ],
   "routes": [
     {
       "src": "/ordenar",
-      "dest": "/ordenar",
-      "continue": true
-    },
-    {
-      "src": "/ordenar/(.*)",
       "dest": "/ordenar"
     }
   ],
