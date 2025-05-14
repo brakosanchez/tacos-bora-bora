@@ -16,7 +16,10 @@ const OrderButton: React.FC<OrderButtonProps> = ({ className = '', onClick }) =>
     if (onClick) {
       onClick();
     }
-    router.push('/ordenar');
+    // Add a small delay to ensure any previous onClick handlers complete
+    setTimeout(() => {
+      router.push('/ordenar');
+    }, 100);
   };
 
   return (
