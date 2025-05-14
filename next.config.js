@@ -2,18 +2,17 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    NEXT_PUBLIC_SITE_URL: process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}`
-      : 'https://www.tacosborabora.com'
+    NEXT_PUBLIC_SITE_URL: 'https://www.tacosborabora.com'
   },
   images: {
     domains: ['www.tacosborabora.com', 'tacos-bora-bora.vercel.app']
   },
-  async rewrites() {
+  async redirects() {
     return [
       {
         source: '/ordenar',
-        destination: '/ordenar'
+        destination: '/ordenar',
+        permanent: false
       }
     ];
   }
