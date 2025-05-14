@@ -7,15 +7,27 @@ import { useState, useEffect } from 'react';
 
 export default function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+    if (isFirstLoad) {
+      // Primer carga de la página
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        setIsFirstLoad(false);
+      }, 2000);
 
-    return () => clearTimeout(timer);
-  }, [pathname]);
+      return () => clearTimeout(timer);
+    } else {
+      // Transiciones entre páginas
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [pathname, isFirstLoad]);
 
   return (
     <AnimatePresence mode="wait">
@@ -45,16 +57,19 @@ export default function PageTransition({ children }: { children: React.ReactNode
           <motion.div
             initial={{ 
               opacity: 0,
-              scale: 0.7 
+              scale: 0.7,
+              y: 50
             }}
             animate={{ 
               opacity: 1,
               scale: 1,
+              y: 0,
               transition: {
-                duration: 0.8,
+                duration: 1,
                 type: "spring",
-                stiffness: 120,
-                damping: 10
+                stiffness: 100,
+                damping: 8,
+                bounce: 0.5
               }
             }}
             whileHover={{ scale: 1.05 }}
