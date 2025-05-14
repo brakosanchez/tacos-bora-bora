@@ -6,15 +6,6 @@ const nextConfig = {
   },
   images: {
     domains: ['www.tacosborabora.com', 'tacos-bora-bora.vercel.app']
-  },
-  async redirects() {
-    return [
-      {
-        source: '/ordenar',
-        destination: '/ordenar',
-        permanent: false
-      }
-    ];
   }
 }
 
