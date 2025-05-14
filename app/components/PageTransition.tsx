@@ -5,53 +5,18 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
-const pageVariants = {
-  initial: { 
-    opacity: 0, 
-    x: '-10%', 
-    scale: 0.95,
-    rotateY: 15
-  },
-  in: { 
-    opacity: 1, 
-    x: 0, 
-    scale: 1,
-    rotateY: 0,
-    transition: {
-      duration: 0.7,
-      type: 'tween',
-      ease: 'anticipate'
-    }
-  },
-  out: { 
-    opacity: 0, 
-    x: '10%', 
-    scale: 0.95,
-    rotateY: -15,
-    transition: {
-      duration: 0.7,
-      type: 'tween',
-      ease: 'anticipate'
-    }
-  }
-};
-
 const loadingVariants = {
   hidden: { 
-    opacity: 0, 
-    scale: 0.9 
+    opacity: 0 
   },
   visible: { 
     opacity: 1,
-    scale: 1,
     transition: {
       type: 'tween',
-      duration: 0.8,
+      duration: 0.5,
       ease: 'easeInOut'
     }
-  },
-  hover: { scale: 1.05 },
-  tap: { scale: 0.95 }
+  }
 };
 
 export default function PageTransition({ children }: { children: React.ReactNode }) {
@@ -60,7 +25,7 @@ export default function PageTransition({ children }: { children: React.ReactNode
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const loadingDuration = isFirstLoad ? 2000 : 1000;
+    const loadingDuration = isFirstLoad ? 1500 : 800;
     const timer = setTimeout(() => {
       setIsLoading(false);
       if (isFirstLoad) setIsFirstLoad(false);
@@ -73,16 +38,14 @@ export default function PageTransition({ children }: { children: React.ReactNode
     <AnimatePresence mode="wait">
       {isLoading && (
         <motion.div 
-          initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+          initial={{ opacity: 0 }}
           animate={{ 
-            opacity: 0.78, 
-            backdropFilter: 'blur(8px)',
-            transition: { duration: 0.7, ease: 'easeInOut' }
+            opacity: 0.78,
+            transition: { duration: 0.5, ease: 'easeInOut' }
           }}
           exit={{ 
             opacity: 0,
-            backdropFilter: 'blur(0px)', 
-            transition: { duration: 0.7, ease: 'easeInOut' }
+            transition: { duration: 0.5, ease: 'easeInOut' }
           }}
           className="fixed inset-0 z-50 flex items-center justify-center bg-bora-black"
         >
@@ -90,15 +53,13 @@ export default function PageTransition({ children }: { children: React.ReactNode
             variants={loadingVariants}
             initial="hidden"
             animate="visible"
-            whileHover="hover"
-            whileTap="tap"
           >
             <Image 
               src="/images/Logo.png" 
               alt="Tacos Bora Bora Logo" 
-              width={200} 
-              height={200}
-              className="transition-transform duration-300 ease-in-out"
+              width={250} 
+              height={250}
+              className="opacity-90"
             />
           </motion.div>
         </motion.div>
@@ -106,10 +67,15 @@ export default function PageTransition({ children }: { children: React.ReactNode
 
       <motion.div 
         key={pathname}
-        initial="initial"
-        animate="in"
-        exit="out"
-        variants={pageVariants}
+        initial={{ opacity: 0 }}
+        animate={{ 
+          opacity: 1,
+          transition: { duration: 0.5, ease: 'easeInOut' }
+        }}
+        exit={{ 
+          opacity: 0,
+          transition: { duration: 0.5, ease: 'easeInOut' }
+        }}
         className="relative"
       >
         {children}
