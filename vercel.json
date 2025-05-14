@@ -1,16 +1,4 @@
 {
-  "redirects": [
-    {
-      "source": "https://tacosborabora.com",
-      "destination": "https://www.tacosborabora.com",
-      "permanent": true
-    },
-    {
-      "source": "http://tacosborabora.com",
-      "destination": "https://www.tacosborabora.com",
-      "permanent": true
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
