@@ -1,7 +1,5 @@
 'use client';
 
-import OrderButton from './OrderButton';
-
 interface MenuItem {
   name: string;
   price: number;
@@ -136,13 +134,7 @@ export default function Menu() {
         </div>
       </div>
 
-      {/* Botón de ordenar */}
-      <div className="mt-12 text-center">
-        <OrderButton 
-          className="bg-orange-600 text-white px-8 py-4 rounded-lg text-xl font-semibold hover:bg-orange-700 transition-colors"
-          onClick={() => console.log('OrderButton clicked in Menu component')} 
-        />
-      </div>
+      {/* Botón de ordenar eliminado */}
     </section>
   );
 }
