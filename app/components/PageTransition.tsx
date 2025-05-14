@@ -21,44 +21,51 @@ export default function PageTransition({ children }: { children: React.ReactNode
     <AnimatePresence mode="wait">
       {isLoading && (
         <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
           animate={{ 
-            opacity: 1, 
-            scale: 1,
+            opacity: 0.78, 
+            backdropFilter: 'blur(8px)',
             transition: { 
-              duration: 1,
+              duration: 0.6,
               type: "tween",
               ease: "easeInOut" 
             }
           }}
           exit={{ 
-            opacity: 0, 
-            scale: 0.8,
+            opacity: 0,
+            backdropFilter: 'blur(0px)', 
             transition: { 
-              duration: 0.8,
+              duration: 0.6,
               type: "tween",
               ease: "easeInOut" 
             }
           }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-bora-black/90 backdrop-blur-md"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-bora-black"
         >
           <motion.div
-            initial={{ opacity: 0.6 }}
+            initial={{ 
+              opacity: 0,
+              scale: 0.7 
+            }}
             animate={{ 
               opacity: 1,
+              scale: 1,
               transition: {
-                duration: 1.5,
-                repeat: Infinity,
-                repeatType: "reverse"
+                duration: 0.8,
+                type: "spring",
+                stiffness: 120,
+                damping: 10
               }
             }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             <Image 
               src="/images/Logo.png" 
               alt="Tacos Bora Bora Logo" 
               width={200} 
               height={200}
-              className="transition-all duration-1000"
+              className="transition-transform duration-300 ease-in-out"
             />
           </motion.div>
         </motion.div>
@@ -70,15 +77,15 @@ export default function PageTransition({ children }: { children: React.ReactNode
         animate="animateState" 
         exit="exitState"
         transition={{
-          duration: 0.8,
+          duration: 0.6,
           type: "tween",
           ease: "easeInOut"
         }}
         variants={{
           initialState: {
             opacity: 0,
-            y: 100,
-            scale: 0.95
+            y: 50,
+            scale: 0.98
           },
           animateState: {
             opacity: 1,
@@ -87,8 +94,8 @@ export default function PageTransition({ children }: { children: React.ReactNode
           },
           exitState: {
             opacity: 0,
-            y: -100,
-            scale: 0.95
+            y: -50,
+            scale: 0.98
           },
         }}
         className="relative"
