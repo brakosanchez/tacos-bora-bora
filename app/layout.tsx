@@ -1,5 +1,6 @@
 import './globals.css'
 import { Bebas_Neue, Yeseva_One, Unbounded } from 'next/font/google'
+import Navbar from './components/Navbar'
 
 const bebasNeue = Bebas_Neue({
   weight: '400',
@@ -55,7 +56,12 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${bebasNeue.variable} ${yesevaOne.variable} ${unbounded.variable} font-sans antialiased`}>
-        {children}
+        <div className="flex flex-col min-h-screen">
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Navbar />
+        </div>
       </body>
     </html>
   )
