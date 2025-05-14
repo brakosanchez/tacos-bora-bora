@@ -13,6 +13,7 @@ export default function Navbar() {
     { name: 'Inicio', href: '/' },
     { name: 'Menú', href: '/menu' },
     { name: 'Ordenar', href: '/ordenar' },
+    { name: 'Inventario', href: '/inventario' },
     { name: 'Ubicación', href: '/ubicacion' },
     { name: 'Contacto', href: '/contacto' },
   ];
