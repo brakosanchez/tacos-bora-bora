@@ -20,24 +20,30 @@ export default function PageTransition({ children }: { children: React.ReactNode
     return () => clearTimeout(timer);
   }, [pathname, isFirstLoad]);
 
+  const isHomePage = pathname === '/';
+
   return (
     <AnimatePresence mode="wait">
       {isLoading && (
         <motion.div 
           initial={{ opacity: 1, backgroundColor: 'black' }}
-          animate={{ 
+          animate={isHomePage ? { 
             opacity: [1, 1, 0],
             transition: {
               duration: 2,
               times: [0, 0.9, 1],
               ease: 'easeInOut'
             }
-          }}
+          } : { opacity: 1 }}
+          exit={isHomePage ? { 
+            opacity: 0,
+            transition: { duration: 0.5, ease: 'easeInOut' }
+          } : { opacity: 0 }}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black"
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ 
+            initial={isHomePage ? { opacity: 0, scale: 0.8 } : { opacity: 0 }}
+            animate={isHomePage ? { 
               opacity: [0, 1, 1],
               scale: [0.8, 1, 1],
               transition: {
@@ -45,15 +51,38 @@ export default function PageTransition({ children }: { children: React.ReactNode
                 times: [0, 0.3, 1],
                 ease: 'easeInOut'
               }
+            } : {
+              opacity: [0, 1, 0],
+              scale: [0.7, 1, 0.7],
+              transition: {
+                duration: 0.8,
+                times: [0, 0.5, 1],
+                ease: 'easeInOut'
+              }
             }}
           >
-            <Image 
-              src="/images/Logo.png" 
-              alt="Tacos Bora Bora Logo" 
-              width={250} 
-              height={250}
-              className="opacity-90"
-            />
+            {isHomePage ? (
+              <Image 
+                src="/images/Logo.png" 
+                alt="Tacos Bora Bora Logo" 
+                width={250} 
+                height={250}
+                className="opacity-90"
+              />
+            ) : (
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ 
+                  scale: 1,
+                  transition: {
+                    type: 'spring',
+                    stiffness: 300,
+                    damping: 20
+                  }
+                }}
+                className="w-32 h-32 bg-bora-orange rounded-full opacity-70 animate-pulse"
+              />
+            )}
           </motion.div>
         </motion.div>
       )}
