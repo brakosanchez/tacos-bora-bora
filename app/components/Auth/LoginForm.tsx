@@ -38,6 +38,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose, onSuccess }) => {
               className="w-full bg-bora-black/50 border border-bora-orange/20 rounded-lg px-4 py-2 text-bora-white/90
                        focus:outline-none focus:border-bora-yellow focus:ring-2 focus:ring-bora-yellow/20"
               required
+              autoComplete="username"
             />
           </div>
           
@@ -52,6 +53,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose, onSuccess }) => {
               className="w-full bg-bora-black/50 border border-bora-orange/20 rounded-lg px-4 py-2 text-bora-white/90
                        focus:outline-none focus:border-bora-yellow focus:ring-2 focus:ring-bora-yellow/20"
               required
+              autoComplete="current-password"
             />
           </div>
 

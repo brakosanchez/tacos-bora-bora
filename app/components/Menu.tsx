@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 interface MenuItem {
   name: string;
   price: number;
@@ -52,6 +54,15 @@ const drinks = [
 ];
 
 export default function Menu() {
+  const [selectedExtras, setSelectedExtras] = useState<string[]>([]);
+
+  const toggleExtra = (extraName: string) => {
+    setSelectedExtras((prev: string[]) => 
+      prev.includes(extraName) 
+        ? prev.filter((name: string) => name !== extraName)
+        : [...prev, extraName]
+    );
+  }
   return (
     <section className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,7 +91,22 @@ export default function Menu() {
                 {item.description && (
                   <p className="text-bora-white/70 text-sm mb-2">{item.description}</p>
                 )}
-
+                <button
+                  key={item.name}
+                  onClick={() => toggleExtra(item.name)}
+                  className={`
+                    relative overflow-hidden
+                    bg-bora-orange/20 text-bora-white p-2 rounded-lg text-sm
+                    transition-all duration-300 ease-in-out
+                    transform hover:scale-105 hover:bg-bora-orange/40
+                    active:scale-95 active:bg-bora-orange/60
+                    ${selectedExtras.includes(item.name) ? 'ring-2 ring-bora-yellow' : ''}
+                    group
+                  `}
+                >
+                  <span className="relative z-10">{item.name} (+${item.price})</span>
+                  <span className="absolute inset-0 bg-bora-orange/20 opacity-0 group-hover:opacity-50 transition-opacity duration-300"></span>
+                </button>
               </div>
             ))}
           </div>

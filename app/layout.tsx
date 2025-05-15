@@ -26,7 +26,6 @@ const unbounded = Unbounded({
 export const metadata = {
   title: 'Tacos Bora Bora',
   description: 'La mejor taquería con auténtico sabor tropical',
-  metadataBase: new URL('https://www.tacosborabora.com'),
   icons: {
     icon: '/images/favicon.png',
     shortcut: '/images/favicon.png',
@@ -59,9 +58,11 @@ export default function RootLayout({
       <body className={`${bebasNeue.variable} ${yesevaOne.variable} ${unbounded.variable} font-sans antialiased relative`}>
         <div className="flex flex-col min-h-screen">
           <main className="flex-grow relative">
-            <PageTransition>{children}</PageTransition>
+            <PageTransition>
+              <Navbar />
+              {children}
+            </PageTransition>
           </main>
-          <Navbar />
         </div>
       </body>
     </html>

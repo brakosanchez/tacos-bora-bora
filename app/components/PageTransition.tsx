@@ -2,7 +2,6 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 export default function PageTransition({ children }: { children: React.ReactNode }) {
@@ -62,12 +61,11 @@ export default function PageTransition({ children }: { children: React.ReactNode
             }}
           >
             {isHomePage ? (
-              <Image 
-                src="/images/Logo.png" 
-                alt="Tacos Bora Bora Logo" 
-                width={250} 
-                height={250}
-                className="opacity-90"
+              <div 
+                className="w-[250px] h-[250px] bg-contain bg-center bg-no-repeat opacity-90"
+                style={{ backgroundImage: 'url(/images/Logo.png)' }}
+                role="img"
+                aria-label="Tacos Bora Bora Logo"
               />
             ) : (
               <motion.div

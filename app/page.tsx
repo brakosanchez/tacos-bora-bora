@@ -7,11 +7,9 @@ import OrderButton from './components/OrderButton';
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <Navbar />
-      
+    <main className="min-h-screen pt-16">
       {/* Hero Section */}
-      <div className="relative h-screen flex items-center justify-center overflow-hidden">
+      <div className="relative h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden">
         {/* Background layers */}
         <div className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center">
           {/* Overlay gradients */}
@@ -26,10 +24,10 @@ export default function Home() {
         <div className="relative z-10 text-center text-white px-4">
           <div className="bg-bora-black/30 backdrop-blur-sm p-8 rounded-2xl shadow-2xl border border-bora-orange/20">
             <div className="flex flex-col items-center mb-6">
-              <img
-                src="/images/Logo.png"
-                alt="Tacos Bora Bora Logo"
-                className="w-32 md:w-40 h-auto mb-4 animate-float hover:animate-flame cursor-pointer transition-transform duration-300 hover:scale-110"
+              <div 
+                className="w-32 md:w-40 h-32 md:h-40 mb-4 animate-float hover:animate-flame cursor-pointer transition-transform duration-300 hover:scale-110 bg-[url('/images/Logo.png')] bg-contain bg-center bg-no-repeat priority"
+                role="img"
+                aria-label="Tacos Bora Bora Logo"
               />
               <h1 className="font-bebas text-7xl md:text-9xl tracking-wider relative group">
                 <span className="absolute inset-0 text-transparent bg-gradient-to-r from-bora-yellow via-bora-red to-bora-orange bg-clip-text blur-sm animate-shimmer bg-[length:200%_auto] select-none">
@@ -68,10 +66,11 @@ export default function Home() {
                 className="transform transition-all duration-500 hover:scale-110 hover:rotate-6 
                   hover:drop-shadow-[0_0_20px_rgba(255,165,0,0.7)] animate-float"
               >
-                <img 
-                  src={taco.src} 
-                  alt={taco.alt} 
-                  className="w-48 md:w-64 h-auto object-contain"
+                <div 
+                  className="w-48 md:w-64 h-48 md:h-64 bg-contain bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${taco.src})` }}
+                  role="img"
+                  aria-label={taco.alt}
                 />
               </div>
             ))}
