@@ -2,6 +2,7 @@
 
 import Menu from '../components/Menu';
 import Background from '../components/Background';
+import Cart from '../components/Cart';
 
 export default function MenuPage() {
   return (
@@ -18,7 +19,15 @@ export default function MenuPage() {
           <h1 className="text-5xl md:text-7xl font-bebas text-bora-yellow text-center mb-12 animate-float">
             Nuestro Menú
           </h1>
-          <Menu />
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <Menu />
+            </div>
+            <div className="lg:sticky lg:top-24 h-fit">
+              <Cart />
+            </div>
+          </div>
         </div>
       </div>
     </main>
