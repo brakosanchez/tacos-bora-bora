@@ -100,24 +100,24 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Our Story */}
             <div className="bg-black/30 backdrop-blur-sm p-8 rounded-2xl border border-white/10 mb-8">
-              <h3 className="font-yeseva text-2xl text-bora-yellow mb-4">Nuestra Historia</h3>
-              <p className="text-bora-white/90 mb-4">
+              <h3 className="font-bebas text-2xl text-bora-yellow mb-4">Nuestra Historia</h3>
+              <p className="font-unbounded text-bora-white/90 mb-4">
                 Desde agosto del 2021, con el apoyo incondicional de nuestra familia, dimos vida a este sueño. Inspirados por nuestro amor a la naturaleza y compromiso con la calidad, creamos un espacio único donde cada taco es una experiencia tropical.
               </p>
             </div>
 
             {/* Location Info */}
             <div className="bg-black/30 backdrop-blur-sm p-8 rounded-2xl border border-white/10">
-              <h3 className="font-yeseva text-2xl text-cyan-400 mb-4">Ubicación</h3>
-              <p className="text-bora-white/90 mb-4">Calle Alondras #410, Los Aguiluchos, Nextlalpan, Estado de México</p>
-              <p className="text-bora-yellow/80 text-sm mb-4">A 10 minutos del AIFA</p>
-              <h3 className="font-yeseva text-2xl text-bora-yellow mb-4 mt-8">Horario</h3>
-              <p className="text-bora-white/90">Abierto todos los días</p>
-              <p className="text-bora-white/90">9:00 a.m. – 4:00 p.m.</p>
+              <h3 className="font-bebas text-2xl text-cyan-400 mb-4">Ubicación</h3>
+              <p className="font-unbounded text-bora-white/90 mb-4">Calle Alondras #410, Los Aguiluchos, Nextlalpan, Estado de México</p>
+              <p className="font-unbounded text-bora-yellow/80 text-sm mb-4">A 10 minutos del AIFA</p>
+              <h3 className="font-bebas text-2xl text-bora-yellow mb-4 mt-8">Horario</h3>
+              <p className="font-unbounded text-bora-white/90">Abierto todos los días</p>
+              <p className="font-unbounded text-bora-white/90">9:00 a.m. – 4:00 p.m.</p>
             </div>
             {/* Social Media */}
             <div className="bg-black/30 backdrop-blur-sm p-8 rounded-2xl border border-white/10">
-              <h3 className="font-yeseva text-2xl text-cyan-400 mb-4">Síguenos</h3>
+              <h3 className="font-bebas text-2xl text-cyan-400 mb-4">Síguenos</h3>
               <div className="space-y-4">
                 <a href="https://instagram.com/tacosborabora" target="_blank" rel="noopener noreferrer" 
                    className="flex items-center text-white/80 hover:text-cyan-400 transition-colors">

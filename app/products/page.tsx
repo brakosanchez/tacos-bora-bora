@@ -54,8 +54,8 @@ export default function ProductsPage() {
                 />
                 <div className="p-4 text-center">
                   <h2 className="text-2xl font-bebas text-bora-yellow mb-2">{product.name}</h2>
-                  <p className="text-2xl font-bebas text-bora-yellow mb-2">${product.price}</p>
-                  <p className="text-base font-bebas text-gray-300 line-clamp-2">{product.description}</p>
+                  <p className="text-2xl font-yeseva text-bora-yellow mb-2">${product.price}</p>
+                  <p className="text-base font-unbounded text-gray-300 line-clamp-2">{product.description}</p>
                 </div>
               </div>
             ))}
