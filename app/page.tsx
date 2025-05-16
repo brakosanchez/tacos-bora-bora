@@ -1,15 +1,14 @@
 'use client';
 
-import Navbar from './components/Navbar';
 import Menu from './components/Menu';
 import Background from './components/Background';
 import OrderButton from './components/OrderButton';
 
 export default function Home() {
   return (
-    <main className="min-h-screen pt-16">
+    <main className="min-h-screen bg-bora-black">
       {/* Hero Section */}
-      <div className="relative h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden">
+      <div className="relative min-h-[calc(100vh-8rem)] flex flex-col justify-center items-center overflow-hidden pt-32 pb-32">
         {/* Background layers */}
         <div className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center">
           {/* Overlay gradients */}
@@ -21,14 +20,14 @@ export default function Home() {
         <div className="absolute inset-0 bg-[url('/images/palm-overlay.png')] bg-contain bg-right-top opacity-30 animate-sway"></div>
         
         {/* Content */}
-        <div className="relative z-10 text-center text-white px-4">
-          <div className="bg-bora-black/30 backdrop-blur-sm p-8 rounded-2xl shadow-2xl border border-bora-orange/20">
-            <div className="flex flex-col items-center mb-6">
-              <div 
-                className="w-32 md:w-40 h-32 md:h-40 mb-4 animate-float hover:animate-flame cursor-pointer transition-transform duration-300 hover:scale-110 bg-[url('/images/Logo.png')] bg-contain bg-center bg-no-repeat priority"
-                role="img"
-                aria-label="Tacos Bora Bora Logo"
-              />
+        <div className="relative z-20 text-center text-white px-12 mb-16">
+          <div className="bg-bora-black/30 backdrop-blur-sm p-8 rounded-2xl shadow-2xl border border-bora-orange/20 animate-float">
+             <div className="flex flex-col items-center mb-6">
+               <div 
+                 className="w-48 md:w-64 h-48 md:h-64 mb-8 hover:animate-flame cursor-pointer transition-transform duration-300 hover:scale-110 bg-[url('/images/Logo.png')] bg-contain bg-center bg-no-repeat priority"
+                 role="img"
+                 aria-label="Tacos Bora Bora Logo"
+               />
               <h1 className="font-bebas text-7xl md:text-9xl tracking-wider relative group">
                 <span className="absolute inset-0 text-transparent bg-gradient-to-r from-bora-yellow via-bora-red to-bora-orange bg-clip-text blur-sm animate-shimmer bg-[length:200%_auto] select-none">
                   Ven a la isla del sabor
@@ -51,34 +50,48 @@ export default function Home() {
                       animate-water"></div>
       </div>
 
-      {/* Taco Showcase */}
-      <section id="tacos" className="relative bg-gradient-to-b from-bora-brown to-bora-black py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bebas text-white text-center mb-12">Nuestros Tacos</h2>
-          <div className="flex justify-center items-center space-x-8">
-            {[
-              { src: '/images/bistec.png', alt: 'Taco de Bistec' },
-              { src: '/images/longaniza .png', alt: 'Taco de Longaniza' },
-              { src: '/images/pollo.png', alt: 'Taco de Pollo' }
-            ].map((taco, index) => (
-              <div 
-                key={index} 
-                className="transform transition-all duration-500 hover:scale-110 hover:rotate-6 
-                  hover:drop-shadow-[0_0_20px_rgba(255,165,0,0.7)] animate-float"
-              >
-                <div 
-                  className="w-48 md:w-64 h-48 md:h-64 bg-contain bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url(${taco.src})` }}
-                  role="img"
-                  aria-label={taco.alt}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Contact Section */}
+      
+      <div className="min-h-[calc(100vh-8rem)]">
+        {/* Taco Showcase */}
+        <section id="tacos" className="relative bg-gradient-to-b from-bora-brown to-bora-black pt-8 pb-8 mt-0">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl md:text-5xl font-bebas text-white text-center mb-12">Nuestros Tacos</h2>
+            <div className="flex justify-center items-center space-x-8">
+              {[
+                { 
+                  src: '/images/bistec.png', 
+                  alt: 'Taco de Bistec',
+                  name: 'Bistec'
+                },
+                { 
+                  src: '/images/longaniza .png', 
+                  alt: 'Taco de Longaniza',
+                  name: 'Longaniza'
+                },
+                { 
+                  src: '/images/pollo.png', 
+                  alt: 'Taco de Pollo',
+                  name: 'Pollo'
+                }
+              ].map((taco, index) => (
+                <div 
+                  key={index} 
+                  className="transform transition-all duration-500 hover:scale-110 hover:rotate-6 
+                    hover:drop-shadow-[0_0_20px_rgba(255,165,0,0.7)] animate-float"
+                >
+                  <img 
+                    src={taco.src} 
+                    alt={taco.alt}
+                    className="w-48 md:w-64 h-48 md:h-64 object-contain"
+                    title={taco.name}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
       <section id="contacto" className="relative bg-black py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-bebas text-white text-center mb-12">

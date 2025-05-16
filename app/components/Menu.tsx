@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
+import FireTitle from './FireTitle';
 
 interface MenuItem {
   id: string;
@@ -99,26 +100,27 @@ export default function Menu() {
   };
   
   return (
-    <section>
-      <div>
-        <h2 className="text-4xl font-bebas text-bora-yellow text-center mb-16">¡Haz tu pedido ahora!</h2>
-        
+    <section className="flex flex-col justify-center items-center min-h-screen gap-6 md:gap-8">
+      <div className="max-w-7xl mx-auto p-4 md:p-6 lg:p-8">
         {/* Salsas para acompañar */}
         <div className="mb-16">
-          <h3 className="text-3xl font-yeseva text-bora-orange mb-6 hover:animate-pulse-warm cursor-default">Salsas para tu Pedido</h3>
-          <div className="bg-bora-black/30 backdrop-blur-sm rounded-lg p-6 border border-bora-orange/20">
+          <div className="text-center mb-8">
+            <FireTitle text="Salsas para tu Pedido" isHovered={false} />
+          </div>
+          <div className="bg-bora-black/30 backdrop-blur-sm rounded-lg p-8 border border-bora-orange/20">
             <p className="text-bora-white/70 text-sm mb-4 font-unbounded">Selecciona las salsas que deseas para tus tacos:</p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 justify-center items-center">
               {salsas.map((salsa) => (
                 <button
                   key={salsa.id}
                   onClick={() => toggleSalsa(salsa.id)}
                   className={`
-                    text-sm px-3 py-1.5 rounded-full border 
-                    transition-all duration-200 ease-in-out
+                    text-sm px-4 py-2 rounded-full border 
+                    transition-all duration-300 ease-in-out
                     ${selectedSalsas.includes(salsa.id) 
-                      ? 'bg-bora-orange/40 text-bora-white border-bora-orange' 
-                      : 'bg-bora-black/40 text-bora-white/70 border-bora-orange/20 hover:border-bora-orange/50'}
+                      ? 'bg-gradient-to-r from-red-600/40 via-orange-600/40 to-yellow-600/40 text-bora-white border-bora-orange shadow-lg shadow-orange-500/20' 
+                      : 'bg-bora-black/40 text-bora-white/70 border-bora-orange/20 hover:border-bora-orange/50 hover:bg-bora-orange/20'}
+                    ${selectedSalsas.includes(salsa.id) && 'animate-pulse'}
                   `}
                 >
                   {salsa.name}
@@ -130,14 +132,16 @@ export default function Menu() {
         
         {/* Tacos Section */}
         <div className="mb-16">
-          <h3 className="text-3xl font-yeseva text-bora-orange mb-6 hover:animate-pulse-warm cursor-default">Tacos</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="text-center mb-8">
+            <FireTitle text="Tacos" isHovered={false} />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {menuItems.filter(item => item.category === 'Tacos').map((item) => (
               <div 
                 key={item.id} 
                 onClick={() => handleItemClick(item.id, item.category)}
                 className={`
-                  bg-bora-black/30 backdrop-blur-sm rounded-lg p-6 border cursor-pointer
+                  bg-bora-black/30 backdrop-blur-sm rounded-lg p-4 md:p-6 border cursor-pointer
                   ${selectedItem === item.id ? 'border-bora-yellow ring-2 ring-bora-yellow' : 'border-bora-orange/20'} 
                   hover:border-bora-yellow transition-all duration-200
                 `}
@@ -166,14 +170,16 @@ export default function Menu() {
 
         {/* Especialidades Section */}
         <div className="mb-16">
-          <h3 className="text-3xl font-yeseva text-bora-red mb-6">Especialidades</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="text-center mb-8">
+            <FireTitle text="Especialidades" isHovered={false} />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {menuItems.filter(item => item.category === 'Especialidades').map((item) => (
               <div 
                 key={item.id}
                 onClick={() => handleItemClick(item.id, item.category)}
                 className={`
-                  bg-black/30 backdrop-blur-sm rounded-lg p-6 border cursor-pointer
+                  bg-black/30 backdrop-blur-sm rounded-lg p-4 md:p-6 border cursor-pointer
                   ${selectedItem === item.id ? 'border-cyan-400 ring-2 ring-cyan-400' : 'border-white/10'} 
                   hover:border-cyan-500/50 transition-all duration-200
                 `}
@@ -202,14 +208,16 @@ export default function Menu() {
 
         {/* Extras Section */}
         <div className="mb-16">
-          <h3 className="text-3xl font-yeseva text-bora-orange mb-6 hover:animate-pulse-warm cursor-default">Extras</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="text-center mb-8">
+            <FireTitle text="Extras" isHovered={false} />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {extras.map((item) => (
               <div 
                 key={item.id}
                 onClick={() => handleItemClick(item.id, item.category)}
                 className={`
-                  bg-bora-black/30 backdrop-blur-sm rounded-lg p-6 border cursor-pointer
+                  bg-bora-black/30 backdrop-blur-sm rounded-lg p-4 md:p-6 border cursor-pointer
                   ${selectedItem === item.id ? 'border-bora-yellow ring-2 ring-bora-yellow' : 'border-bora-orange/20'} 
                   hover:border-bora-yellow transition-all duration-200
                 `}
@@ -228,14 +236,16 @@ export default function Menu() {
 
         {/* Bebidas Section */}
         <div className="mb-16">
-          <h3 className="text-3xl font-yeseva text-bora-orange mb-6 hover:animate-pulse-warm cursor-default">Bebidas</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="text-center mb-8">
+            <FireTitle text="Bebidas" isHovered={false} />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {drinks.map((item) => (
               <div 
                 key={item.id}
                 onClick={() => handleItemClick(item.id, item.category)}
                 className={`
-                  bg-black/30 backdrop-blur-sm rounded-lg p-6 border cursor-pointer
+                  bg-black/30 backdrop-blur-sm rounded-lg p-4 md:p-6 border cursor-pointer
                   ${selectedItem === item.id ? 'border-cyan-400 ring-2 ring-cyan-400' : 'border-white/10'} 
                   hover:border-cyan-500/50 transition-all duration-200
                 `}
@@ -253,15 +263,17 @@ export default function Menu() {
         </div>
         
         {/* Salsas para venta */}
-        <div>
-          <h3 className="text-3xl font-yeseva text-bora-orange mb-6 hover:animate-pulse-warm cursor-default">Salsas para Llevar</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mb-16">
+          <div className="text-center mb-8">
+            <FireTitle text="Salsas para Llevar" isHovered={false} />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {salsasVenta.map((item) => (
               <div 
                 key={item.id}
                 onClick={() => handleItemClick(item.id, item.category)}
                 className={`
-                  bg-bora-black/30 backdrop-blur-sm rounded-lg p-6 border cursor-pointer
+                  bg-bora-black/30 backdrop-blur-sm rounded-lg p-4 md:p-6 border cursor-pointer
                   ${selectedItem === item.id ? 'border-bora-yellow ring-2 ring-bora-yellow' : 'border-bora-orange/20'} 
                   hover:border-bora-yellow transition-all duration-200
                 `}

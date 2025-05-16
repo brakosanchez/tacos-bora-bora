@@ -9,7 +9,7 @@ export default function Cart() {
   if (totalItems === 0) {
     return (
       <div className="bg-bora-black/30 backdrop-blur-sm rounded-lg p-6 border border-bora-orange/20">
-        <h3 className="text-2xl font-yeseva text-bora-orange mb-4">Tu Carrito</h3>
+        <h3 className="text-2xl font-yeseva text-bora-orange text-center">Tu Carrito</h3>
         <p className="text-bora-white/70 text-center py-6 font-unbounded">Tu carrito está vacío</p>
       </div>
     );
@@ -18,7 +18,7 @@ export default function Cart() {
   return (
     <div className="bg-bora-black/30 backdrop-blur-sm rounded-lg p-6 border border-bora-orange/20">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-2xl font-yeseva text-bora-orange">Tu Carrito</h3>
+        <h3 className="text-2xl font-yeseva text-bora-orange text-center">Tu Carrito</h3>
         <button 
           onClick={clearCart}
           className="text-sm text-bora-white/70 hover:text-bora-white px-3 py-1 rounded-full border border-bora-orange/20 hover:border-bora-orange/50 transition-all"
@@ -34,7 +34,7 @@ export default function Cart() {
       </div>
       
       <div className="border-t border-bora-orange/20 pt-4">
-        <div className="flex justify-between text-bora-white mb-2">
+        <div className="flex justify-between text-bora-white mb-2 text-center">
           <span className="font-unbounded">Total:</span>
           <span className="font-bebas text-xl text-bora-yellow">${totalPrice}</span>
         </div>

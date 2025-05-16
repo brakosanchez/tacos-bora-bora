@@ -59,9 +59,9 @@ export default function RootLayout({
       <body className={`${bebasNeue.variable} ${yesevaOne.variable} ${unbounded.variable} font-sans antialiased relative`}>
         <CartProvider>
           <div className="flex flex-col min-h-screen">
+            <Navbar />
             <main className="flex-grow relative">
               <PageTransition>
-                <Navbar />
                 {children}
               </PageTransition>
             </main>
