@@ -17,14 +17,5 @@
   ],
   "env": {
     "NODE_VERSION": "18"
-  },
-  "github": {
-    "silent": true
-  },
-  "gitlab": {
-    "silent": true
-  },
-  "bitbucket": {
-    "silent": true
   }
 }
