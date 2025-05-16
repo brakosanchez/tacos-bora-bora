@@ -1,8 +1,20 @@
 'use client';
 
+import React from 'react';
 import { useState } from 'react';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import SuccessModal from '@/components/SuccessModal';
+
+type QuestionType = {
+  id: number;
+  title: string;
+  description: string;
+  type: 'rating' | 'text';
+};
+
+type ResponseType = {
+  [key: number]: number | string | undefined;
+};
 
 const questions = [
   {
@@ -98,9 +110,9 @@ const questions = [
 ];
 
 export default function FeedbackPage() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [responses, setResponses] = useState({});
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState<number>(0);
+  const [responses, setResponses] = useState<ResponseType>({});
+  const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
 
   const handleRatingChange = (questionId: number, value: number | string) => {
     setResponses(prev => ({
@@ -117,7 +129,7 @@ export default function FeedbackPage() {
     setCurrentQuestion(prev => Math.min(questions.length - 1, prev + 1));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     // Solo mostrar el modal si estamos en la última pregunta
