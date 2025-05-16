@@ -48,6 +48,51 @@ export default function ContactoPage() {
               Contáctanos
             </h1>
 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+              {/* Contact Info */}
+              <div className="space-y-6">
+                <div>
+                  <h2 className="font-bebas text-2xl text-bora-yellow mb-4">Ubicación</h2>
+                  <p className="font-unbounded text-bora-white/90 mb-2">
+                    Calle Alondras #410, Los Aguiluchos
+                  </p>
+                  <p className="font-unbounded text-bora-white/90 mb-2">
+                    Nextlalpan, Estado de México
+                  </p>
+                  <p className="font-unbounded text-bora-yellow/80 text-sm">
+                    A 10 minutos del AIFA
+                  </p>
+                </div>
+
+                <div>
+                  <h2 className="font-bebas text-2xl text-bora-yellow mb-4">Horario</h2>
+                  <p className="font-unbounded text-bora-white/90">Abierto todos los días</p>
+                  <p className="font-unbounded text-bora-white/90">9:00 a.m. – 4:00 p.m.</p>
+                </div>
+
+                <div>
+                  <h2 className="font-bebas text-2xl text-bora-yellow mb-4">Contacto</h2>
+                  <p className="font-unbounded text-bora-white/90">Tel: (55) 1234-5678</p>
+                  <p className="font-unbounded text-bora-white/90">WhatsApp: (55) 8765-4321</p>
+                </div>
+              </div>
+
+              {/* Map */}
+              <div className="bg-black/30 p-4 rounded-2xl">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d394.7681360228939!2d-99.09330376256538!3d19.725877189312776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d18dfc827df46b%3A0x82a71a9b70d60acc!2sTacos%20Bora%20Bora!5e0!3m2!1ses-419!2smx!4v1697594400000!5m2!1ses-419!2smx"
+                  width="100%"
+                  height="400"
+                  style={{ border: 0 }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="rounded-xl"
+                ></iframe>
+              </div>
+            </div>
+
+            <h2 className="text-3xl font-bebas text-bora-yellow text-center mb-8">Escríbenos</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-bora-white/90 mb-2 font-unbounded text-sm">

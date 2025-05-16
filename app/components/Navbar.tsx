@@ -78,12 +78,7 @@ function Navbar() {
             >
               Haz tu Pedido
             </Link>
-            <Link 
-              href="/ubicacion" 
-              className="text-gray-300 hover:text-yellow-500 transition-colors text-base font-unbounded px-3"
-            >
-              Ubicación
-            </Link>
+
             <Link 
               href="/contacto" 
               className="text-gray-300 hover:text-yellow-500 transition-colors text-base font-unbounded px-3"
@@ -145,16 +140,7 @@ function Navbar() {
               >
                 Haz tu Pedido
               </Link>
-              <Link 
-                href="/ubicacion" 
-                className="block w-full text-gray-300 hover:text-yellow-500 transition-colors text-lg font-unbounded px-4 py-3 rounded-lg hover:bg-black/80"
-                onClick={() => {
-                  setIsOpen(false);
-                  router.push('/ubicacion');
-                }}
-              >
-                Ubicación
-              </Link>
+
               <Link 
                 href="/contacto" 
                 className="block w-full text-gray-300 hover:text-yellow-500 transition-colors text-lg font-unbounded px-4 py-3 rounded-lg hover:bg-black/80"
