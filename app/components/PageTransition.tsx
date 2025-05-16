@@ -62,8 +62,7 @@ export default function PageTransition({ children }: { children: React.ReactNode
           >
             {isHomePage ? (
               <div 
-                className="w-[250px] h-[250px] bg-contain bg-center bg-no-repeat opacity-90"
-                style={{ backgroundImage: 'url(/images/Logo.png)' }}
+                className="w-[250px] h-[250px] bg-contain bg-center bg-no-repeat opacity-90 bg-[url('/images/logoSolo.png')] md:bg-[url('/images/Logo.png')]"
                 role="img"
                 aria-label="Tacos Bora Bora Logo"
               />

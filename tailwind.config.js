@@ -28,6 +28,7 @@ module.exports = {
         'flame': 'flame 3s ease-in-out infinite',
         'water': 'water 4s ease-in-out infinite',
         'float': 'float 3s ease-in-out infinite',
+        'float-slow': 'float-slow 5s ease-in-out infinite',
         'pulse-warm': 'pulse-warm 2s ease-in-out infinite',
         'shimmer': 'shimmer 3s linear infinite',
         'heat-wave': 'heat-wave 2s ease-in-out infinite',
@@ -36,6 +37,14 @@ module.exports = {
         sway: {
           '0%, 100%': { transform: 'rotate(-5deg)' },
           '50%': { transform: 'rotate(5deg)' }
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' }
+        },
+        'float-slow': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' }
         },
         flame: {
           '0%, 100%': { 

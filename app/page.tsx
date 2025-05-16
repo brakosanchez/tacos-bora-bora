@@ -24,7 +24,7 @@ export default function Home() {
           <div className="bg-bora-black/30 backdrop-blur-sm p-8 rounded-2xl shadow-2xl border border-bora-orange/20 animate-float">
              <div className="flex flex-col items-center mb-6">
                <div 
-                 className="w-48 md:w-64 h-48 md:h-64 mb-8 hover:animate-flame cursor-pointer transition-transform duration-300 hover:scale-110 bg-[url('/images/Logo.png')] bg-contain bg-center bg-no-repeat priority"
+                 className="w-48 h-48 mb-8 hover:animate-flame cursor-pointer transition-transform duration-300 hover:scale-110 bg-contain bg-center bg-no-repeat priority bg-[url('/images/logoSolo.png')] md:bg-[url('/images/Logo.png')] md:w-[256px] md:h-[256px]"
                  role="img"
                  aria-label="Tacos Bora Bora Logo"
                />
@@ -50,13 +50,38 @@ export default function Home() {
                       animate-water"></div>
       </div>
 
+      {/* Front Image Section */}
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-bora-black/30 backdrop-blur-sm"></div>
+        <img 
+          src="/images/frente borabora.jpg" 
+          alt="Fachada de Tacos Bora Bora"
+          className="w-full h-[60vh] object-cover object-center
+            transition-all duration-2000
+            hover:scale-110 hover:rotate-6
+            hover:translate-y-[-10px]
+            hover:shadow-[0_20px_40px_rgba(255,165,0,0.3)]
+            hover:opacity-90
+          "
+        />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <h2 className="text-4xl md:text-6xl font-bebas text-bora-yellow text-center z-10 animate-float">
+            Bienvenidos a Tacos Bora Bora
+          </h2>
+        </div>
+      </div>
+
       {/* Contact Section */}
       
       <div className="min-h-[calc(100vh-8rem)]">
         {/* Taco Showcase */}
         <section id="tacos" className="relative bg-gradient-to-b from-bora-brown to-bora-black pt-8 pb-8 mt-0">
           <div className="container mx-auto px-4">
-            <h2 className="text-4xl md:text-5xl font-bebas text-white text-center mb-12">Nuestros Tacos</h2>
+            <h2 className="text-4xl md:text-5xl font-bebas text-white text-center mb-12">
+              <span className="relative z-10 hover:text-bora-yellow transition-all duration-300" style={{
+                animation: 'float 2s ease-in-out infinite',
+              }}>Nuestros Tacos</span>
+            </h2>
             <div className="flex justify-center items-center space-x-8">
               {[
                 { 

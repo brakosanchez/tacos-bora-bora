@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import FireTitle from './FireTitle';
+import MenuSection from './MenuSection';
 
 interface MenuItem {
   id: string;
@@ -18,7 +19,7 @@ const extras = [
   { id: 'e3', name: 'Consomé (1 litro)', price: 50, category: 'Extras' },
 ];
 
-const salsas = [
+export const salsas = [
   { id: 's1', name: 'Piña', description: 'Salsa de piña fresca con un toque de cilantro' },
   { id: 's2', name: 'Piña con habanero', description: 'Salsa de piña con habanero para los amantes del picante' },
   { id: 's3', name: 'Cebollas moradas', description: 'Cebollas moradas encurtidas con habanero y oregano' },
@@ -62,33 +63,9 @@ const drinks = [
 export default function Menu() {
   const { addToCart } = useCart();
   const [selectedSalsas, setSelectedSalsas] = useState<string[]>([]);
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
   
-  // Efecto de brillo temporal al seleccionar un producto
-  const handleItemClick = (itemId: string, category: string) => {
-    // Establece el item seleccionado para mostrar el efecto de brillo
-    setSelectedItem(itemId);
-    
-    // Agrega el item al carrito con las salsas seleccionadas
-    const item = [...menuItems, ...extras, ...drinks, ...salsasVenta].find(item => item.id === itemId);
-    if (item) {
-      addToCart({
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        quantity: 1,
-        category: item.category,
-        salsas: category === 'Salsas' ? [] : selectedSalsas.map(id => {
-          const salsa = salsas.find(s => s.id === id);
-          return salsa ? salsa.name : '';
-        }).filter(Boolean)
-      });
-    }
-    
-    // Elimina el efecto de brillo después de un breve momento
-    setTimeout(() => {
-      setSelectedItem(null);
-    }, 300);
+  const handleAddToCart = (item: any) => {
+    addToCart(item);
   };
   
   const toggleSalsa = (salsaId: string) => {
@@ -131,167 +108,45 @@ export default function Menu() {
         </div>
         
         {/* Tacos Section */}
-        <div className="mb-16">
-          <div className="text-center mb-8">
-            <FireTitle text="Tacos" isHovered={false} />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {menuItems.filter(item => item.category === 'Tacos').map((item) => (
-              <div 
-                key={item.id} 
-                onClick={() => handleItemClick(item.id, item.category)}
-                className={`
-                  bg-bora-black/30 backdrop-blur-sm rounded-lg p-4 md:p-6 border cursor-pointer
-                  ${selectedItem === item.id ? 'border-bora-yellow ring-2 ring-bora-yellow' : 'border-bora-orange/20'} 
-                  hover:border-bora-yellow transition-all duration-200
-                `}
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="font-unbounded text-bora-white text-lg">{item.name}</h4>
-                  <span className="font-bebas text-xl text-bora-yellow">${item.price}</span>
-                </div>
-                {item.description && (
-                  <p className="text-bora-white/70 text-sm mb-3">{item.description}</p>
-                )}
-                <div className="mt-2 text-bora-orange/80 text-xs">
-                  {selectedSalsas.length > 0 ? (
-                    <p>Con: {selectedSalsas.map(id => {
-                      const salsa = salsas.find(s => s.id === id);
-                      return salsa ? salsa.name : '';
-                    }).join(', ')}</p>
-                  ) : (
-                    <p>Haz clic para agregar al pedido</p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <MenuSection
+          title="Tacos"
+          items={menuItems.filter(item => item.category === 'Tacos')}
+          selectedSalsas={selectedSalsas}
+          onAddToCart={handleAddToCart}
+        />
 
         {/* Especialidades Section */}
-        <div className="mb-16">
-          <div className="text-center mb-8">
-            <FireTitle text="Especialidades" isHovered={false} />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {menuItems.filter(item => item.category === 'Especialidades').map((item) => (
-              <div 
-                key={item.id}
-                onClick={() => handleItemClick(item.id, item.category)}
-                className={`
-                  bg-black/30 backdrop-blur-sm rounded-lg p-4 md:p-6 border cursor-pointer
-                  ${selectedItem === item.id ? 'border-cyan-400 ring-2 ring-cyan-400' : 'border-white/10'} 
-                  hover:border-cyan-500/50 transition-all duration-200
-                `}
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="font-unbounded text-white text-lg">{item.name}</h4>
-                  <span className="font-bebas text-xl text-cyan-400">${item.price}</span>
-                </div>
-                {item.description && (
-                  <p className="text-white/70 text-sm mb-3 font-unbounded">{item.description}</p>
-                )}
-                <div className="mt-2 text-cyan-400/80 text-xs">
-                  {selectedSalsas.length > 0 ? (
-                    <p>Con: {selectedSalsas.map(id => {
-                      const salsa = salsas.find(s => s.id === id);
-                      return salsa ? salsa.name : '';
-                    }).join(', ')}</p>
-                  ) : (
-                    <p>Haz clic para agregar al pedido</p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <MenuSection
+          title="Especialidades"
+          items={menuItems.filter(item => item.category === 'Especialidades')}
+          selectedSalsas={selectedSalsas}
+          onAddToCart={handleAddToCart}
+          categoryColor="cyan-400"
+        />
 
         {/* Extras Section */}
-        <div className="mb-16">
-          <div className="text-center mb-8">
-            <FireTitle text="Extras" isHovered={false} />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {extras.map((item) => (
-              <div 
-                key={item.id}
-                onClick={() => handleItemClick(item.id, item.category)}
-                className={`
-                  bg-bora-black/30 backdrop-blur-sm rounded-lg p-4 md:p-6 border cursor-pointer
-                  ${selectedItem === item.id ? 'border-bora-yellow ring-2 ring-bora-yellow' : 'border-bora-orange/20'} 
-                  hover:border-bora-yellow transition-all duration-200
-                `}
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="font-unbounded text-bora-white text-lg">{item.name}</h4>
-                  <span className="font-bebas text-xl text-bora-yellow">${item.price}</span>
-                </div>
-                <div className="mt-2 text-bora-orange/80 text-xs">
-                  <p>Haz clic para agregar al pedido</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <MenuSection
+          title="Extras"
+          items={extras}
+          selectedSalsas={selectedSalsas}
+          onAddToCart={handleAddToCart}
+        />
 
-        {/* Bebidas Section */}
-        <div className="mb-16">
-          <div className="text-center mb-8">
-            <FireTitle text="Bebidas" isHovered={false} />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {drinks.map((item) => (
-              <div 
-                key={item.id}
-                onClick={() => handleItemClick(item.id, item.category)}
-                className={`
-                  bg-black/30 backdrop-blur-sm rounded-lg p-4 md:p-6 border cursor-pointer
-                  ${selectedItem === item.id ? 'border-cyan-400 ring-2 ring-cyan-400' : 'border-white/10'} 
-                  hover:border-cyan-500/50 transition-all duration-200
-                `}
-              >
-                <div className="flex justify-between items-start">
-                  <h4 className="font-unbounded text-white text-lg">{item.name}</h4>
-                  <span className="font-bebas text-xl text-cyan-400">${item.price}</span>
-                </div>
-                <div className="mt-2 text-cyan-400/80 text-xs">
-                  <p className="font-unbounded">Haz clic para agregar al pedido</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        
-        {/* Salsas para venta */}
-        <div className="mb-16">
-          <div className="text-center mb-8">
-            <FireTitle text="Salsas para Llevar" isHovered={false} />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {salsasVenta.map((item) => (
-              <div 
-                key={item.id}
-                onClick={() => handleItemClick(item.id, item.category)}
-                className={`
-                  bg-bora-black/30 backdrop-blur-sm rounded-lg p-4 md:p-6 border cursor-pointer
-                  ${selectedItem === item.id ? 'border-bora-yellow ring-2 ring-bora-yellow' : 'border-bora-orange/20'} 
-                  hover:border-bora-yellow transition-all duration-200
-                `}
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="font-unbounded text-bora-white text-lg">{item.name}</h4>
-                  <span className="font-bebas text-xl text-bora-yellow">${item.price}</span>
-                </div>
-                {item.description && (
-                  <p className="text-bora-white/70 text-sm mb-3 font-unbounded">{item.description}</p>
-                )}
-                <div className="mt-2 text-bora-orange/80 text-xs">
-                  <p className="font-unbounded">Haz clic para agregar al pedido</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Refrescos Section */}
+        <MenuSection
+          title="Refrescos"
+          items={drinks}
+          selectedSalsas={selectedSalsas}
+          onAddToCart={handleAddToCart}
+        />
+
+        {/* Salsas Section */}
+        <MenuSection
+          title="Salsas"
+          items={salsasVenta}
+          selectedSalsas={selectedSalsas}
+          onAddToCart={handleAddToCart}
+        />
       </div>
     </section>
   );

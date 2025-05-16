@@ -2,7 +2,8 @@ import './globals.css'
 import { Bebas_Neue, Yeseva_One, Unbounded } from 'next/font/google'
 import Navbar from './components/Navbar'
 import PageTransition from './components/PageTransition'
-import { CartProvider } from './context/CartContext'
+import { CartProvider } from './context/CartContext';
+import { Toaster } from 'react-hot-toast';
 
 const bebasNeue = Bebas_Neue({
   weight: '400',
@@ -66,6 +67,18 @@ export default function RootLayout({
               </PageTransition>
             </main>
           </div>
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              style: {
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)',
+                color: '#fff',
+                border: '1px solid #F59E0B',
+                borderRadius: '10px',
+              },
+            }}
+          />
         </CartProvider>
       </body>
     </html>

@@ -24,11 +24,11 @@ function Navbar() {
             className="flex items-center gap-2"
           >
             <img 
-              src="/images/Logo.png" 
+              src="/images/logoSolo.png" 
               alt="Tacos Bora Bora" 
-              className="h-8 w-auto md:hidden"
+              className="h-8 w-auto"
             />
-            <span className="hidden md:block text-bora-yellow font-bebas text-2xl hover:text-yellow-500 transition-colors tracking-wider">
+            <span className="text-bora-yellow font-bebas text-2xl hover:text-yellow-500 transition-colors tracking-wider">
               Tacos Bora Bora
             </span>
           </Link>

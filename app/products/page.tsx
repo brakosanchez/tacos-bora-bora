@@ -1,36 +1,6 @@
 'use client';
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  description: string;
-}
-
-const products: Product[] = [
-  {
-    id: 1,
-    name: "Taco de Bistec",
-    price: 30,
-    image: "/images/bistec.png",
-    description: "Jugosa carne de res marinada"
-  },
-  {
-    id: 2,
-    name: "Taco de Pollo",
-    price: 30,
-    image: "/images/pollo.png",
-    description: "Pollo marinado a la plancha"
-  },
-  {
-    id: 3,
-    name: "Taco de Longaniza",
-    price: 30,
-    image: "/images/longaniza .png",
-    description: "Auténtica longaniza artesanal"
-  }
-];
+import { products, Product } from '../products/data/products';
 
 export default function ProductsPage() {
   return (
@@ -41,24 +11,76 @@ export default function ProductsPage() {
             Nuestros Productos
           </h1>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <div 
-                key={product.id} 
-                className="group relative bg-black/80 rounded-lg overflow-hidden hover:bg-black/90 transition-all duration-300 flex flex-col items-center justify-center"
-              >
-                <img 
-                  src={product.image} 
-                  alt={product.name} 
-                  className="w-48 h-48 object-contain animate-float hover:animate-flame cursor-pointer transition-transform duration-300 hover:scale-110"
-                />
-                <div className="p-4 text-center">
-                  <h2 className="text-2xl font-bebas text-bora-yellow mb-2">{product.name}</h2>
-                  <p className="text-2xl font-yeseva text-bora-yellow mb-2">${product.price}</p>
-                  <p className="text-base font-unbounded text-gray-300 line-clamp-2">{product.description}</p>
+          {/* Tacos Principales */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {products
+              .filter((product: Product) => product.category === "Tacos")
+              .map((product: Product) => (
+                <div 
+                  key={product.id} 
+                  className="group relative bg-bora-black/30 backdrop-blur-sm rounded-2xl overflow-hidden hover:bg-bora-black/40 transition-all duration-300 flex flex-col items-center"
+                >
+                  <div className="relative w-full h-64 flex items-center justify-center">
+                    <img 
+                      src={product.image} 
+                      alt={product.name} 
+                      className="absolute inset-0 w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                    />
+                  </div>
+                  <div className="p-4 text-center">
+                    <h3 className="font-bebas text-2xl text-bora-yellow mb-2">{product.name}</h3>
+                    <p className="font-yeseva text-xl text-bora-yellow">${product.price}</p>
+                    <p className="font-unbounded text-bora-white/70 mt-4">{product.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            }
+          </div>
+
+          {/* Resto de productos */}
+          <div className="mt-16">
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              <button className="px-4 py-2 rounded-full bg-bora-black/40 text-bora-white/70 hover:text-bora-white hover:bg-bora-orange/20 transition-all duration-300">
+                Especialidades
+              </button>
+              <button className="px-4 py-2 rounded-full bg-bora-black/40 text-bora-white/70 hover:text-bora-white hover:bg-bora-orange/20 transition-all duration-300">
+                Extras
+              </button>
+              <button className="px-4 py-2 rounded-full bg-bora-black/40 text-bora-white/70 hover:text-bora-white hover:bg-bora-orange/20 transition-all duration-300">
+                Salsas
+              </button>
+              <button className="px-4 py-2 rounded-full bg-bora-black/40 text-bora-white/70 hover:text-bora-white hover:bg-bora-orange/20 transition-all duration-300">
+                Refrescos
+              </button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {products
+                .filter((product: Product) => product.category !== "Tacos")
+                .map((product: Product) => (
+                  <div 
+                    key={product.id} 
+                    className="group relative bg-bora-black/30 backdrop-blur-sm rounded-2xl overflow-hidden hover:bg-bora-black/40 transition-all duration-300 flex flex-col items-center"
+                  >
+                    <div className="relative w-full h-64 flex items-center justify-center">
+                      <img 
+                        src={product.image} 
+                        alt={product.name} 
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all duration-300 flex items-center justify-center">
+                        <div className="text-center">
+                          <h3 className="font-bebas text-2xl text-bora-yellow mb-2">{product.name}</h3>
+                          <p className="font-yeseva text-xl text-bora-yellow">${product.price}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-4 text-center">
+                      <p className="font-unbounded text-bora-white/70 line-clamp-2">{product.description}</p>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
           </div>
         </div>
       </div>

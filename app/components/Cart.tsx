@@ -1,10 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import CartItem from './CartItem';
+import OrderConfirmationModal from './OrderConfirmationModal';
 
 export default function Cart() {
   const { items, totalItems, totalPrice, clearCart } = useCart();
+  const [isConfirmingOrder, setIsConfirmingOrder] = useState(false);
 
   if (totalItems === 0) {
     return (
@@ -38,9 +41,17 @@ export default function Cart() {
           <span className="font-unbounded text-lg">Total:</span>
           <span className="font-bebas text-2xl text-bora-yellow">${totalPrice}</span>
         </div>
-        <button className="w-full bg-gradient-to-r from-bora-orange to-bora-red text-white py-4 rounded-xl font-unbounded hover:from-bora-red hover:to-bora-orange transition-all duration-300 hover:shadow-bora-orange/50 hover:shadow-xl">
+        <button 
+          onClick={() => setIsConfirmingOrder(true)}
+          className="w-full bg-gradient-to-r from-bora-orange to-bora-red text-white py-4 rounded-xl font-unbounded hover:from-bora-red hover:to-bora-orange transition-all duration-300 hover:shadow-bora-orange/50 hover:shadow-xl"
+        >
           Finalizar Pedido
         </button>
+        
+        <OrderConfirmationModal
+          isOpen={isConfirmingOrder}
+          onClose={() => setIsConfirmingOrder(false)}
+        />
       </div>
     </div>
   );
