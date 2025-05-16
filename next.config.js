@@ -7,7 +7,6 @@ const nextConfig = {
   },
   swcMinify: true,
   experimental: {
-    optimizeCss: true,
     esmExternals: true
   },
   webpack: (config, { isServer }) => {
