@@ -13,3 +13,11 @@ dist
 *.crt
 *.pfx
 *.p12
+package-lock.json
+yarn.lock
+.DS_Store
+*.swp
+*.swo
+.idea
+.vscode
+*.tsbuildinfo
