@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowRightIcon } from '@heroicons/react';
+import { FiChevronRight } from 'react-icons/fi';
 import SuccessModal from '@/components/SuccessModal';
 
 const questions = [
@@ -183,7 +183,7 @@ export default function FeedbackPage() {
                   className="px-6 py-2 rounded-lg bg-bora-yellow text-bora-black hover:bg-yellow-400 flex items-center space-x-2"
                 >
                   <span>Enviar</span>
-                  <ArrowRightIcon className="h-5 w-5" />
+                  <FiChevronRight className="h-5 w-5" />
                 </button>
               ) : (
                 <button
@@ -191,7 +191,7 @@ export default function FeedbackPage() {
                   className="px-6 py-2 rounded-lg bg-bora-yellow text-bora-black hover:bg-yellow-400 flex items-center space-x-2"
                 >
                   <span>Siguiente</span>
-                  <ArrowRightIcon className="h-5 w-5" />
+                  <FiChevronRight className="h-5 w-5" />
                 </button>
               )}
             </div>
