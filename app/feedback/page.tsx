@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowRightIcon } from '@heroicons/react';
+import { ArrowRightIcon } from '@heroicons/react/24';
 import SuccessModal from '@/components/SuccessModal';
 
 const questions = [
