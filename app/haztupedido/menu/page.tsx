@@ -1,8 +1,8 @@
 'use client';
 
-import Menu from '../components/Menu';
-import Background from '../components/Background';
-import Cart from '../components/Cart';
+import Menu from '../../components/Menu';
+import Background from '../../components/Background';
+import Cart from '../../components/Cart';
 
 export default function MenuPage() {
   return (
