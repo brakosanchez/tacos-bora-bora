@@ -51,7 +51,7 @@ export default function UbicacionPage() {
               {/* Map */}
               <div className="bg-black/30 p-4 rounded-2xl">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.170487701034!2d-99.2067750244579!3d19.64339098689968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f5c4a0d04591%3A0x847c48c5b9c96962!2sCalle%20Alondras%20410%2C%20Los%20Aguiluchos%2C%2054850%20Nextlalpan%2C%20M%C3%A9x.%2C%20M%C3%A9x.!5e0!3m2!1ses-419!2smx!4v1684217595000!5m2!1ses-419!2smx"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d394.7681360228939!2d-99.09330376256538!3d19.725877189312776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d18dfc827df46b%3A0x82a71a9b70d60acc!2sTacos%20Bora%20Bora!5e0!3m2!1ses-419!2smx!4v1697594400000!5m2!1ses-419!2smx"
                   width="100%"
                   height="400"
                   style={{ border: 0 }}
