@@ -31,6 +31,7 @@ function Navbar() {
             <span className="text-bora-yellow font-bebas text-2xl hover:text-yellow-500 transition-colors tracking-wider">
               Tacos Bora Bora
             </span>
+
           </Link>
 
           {/* Botón de menú hamburguesa para móviles */}
@@ -84,6 +85,12 @@ function Navbar() {
               className="text-gray-300 hover:text-yellow-500 transition-colors text-base font-unbounded px-3"
             >
               Contacto
+            </Link>
+            <Link 
+              href="/feedback" 
+              className="text-gray-300 hover:text-yellow-500 transition-colors text-base font-unbounded px-3"
+            >
+              Feedback
             </Link>
             {isLoggedIn && (
               <>
