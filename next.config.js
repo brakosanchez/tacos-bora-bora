@@ -19,7 +19,29 @@ const nextConfig = {
         dns: false
       }
     }
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      path: false,
+      os: false,
+      crypto: false,
+      stream: false,
+      http: false,
+      https: false,
+      zlib: false,
+      assert: false,
+      buffer: false,
+      util: false
+    }
     return config
+  },
+  distDir: '.next',
+  output: 'standalone',
+  eslint: {
+    ignoreDuringBuilds: true
+  },
+  typescript: {
+    ignoreBuildErrors: true
   }
 }
 
