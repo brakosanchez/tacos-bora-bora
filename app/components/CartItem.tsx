@@ -18,39 +18,39 @@ export default function CartItem({ item }: CartItemProps) {
   };
 
   return (
-    <div className="flex flex-col bg-bora-black/40 rounded-lg p-4 border border-bora-orange/10">
-      <div className="flex justify-between items-start mb-2">
+    <div className="flex flex-col bg-bora-black/40 rounded-xl p-6 border border-bora-orange/10 hover:border-bora-orange/20 transition-all duration-300">
+      <div className="flex justify-between items-start mb-4">
         <div>
-          <h4 className="font-unbounded text-bora-white">{item.name}</h4>
+          <h4 className="font-bebas text-xl text-bora-yellow">{item.name}</h4>
           {item.salsas && item.salsas.length > 0 && (
-            <p className="text-bora-orange/80 text-xs mt-1 font-unbounded">
-              Con: {item.salsas.join(', ')}
+            <p className="text-bora-orange/80 text-sm mt-2 font-unbounded">
+              <span className="text-bora-white/70">Salsas:</span> {item.salsas.join(', ')}
             </p>
           )}
         </div>
-        <span className="font-bebas text-lg text-bora-yellow">${item.price * item.quantity}</span>
+        <span className="font-bebas text-xl text-bora-yellow">${item.price * item.quantity}</span>
       </div>
       
-      <div className="flex justify-between items-center mt-2">
-        <div className="flex items-center space-x-2">
+      <div className="flex justify-between items-center mt-4">
+        <div className="flex items-center space-x-4">
           <button 
             onClick={() => handleQuantityChange(item.quantity - 1)}
-            className="w-6 h-6 flex items-center justify-center rounded-full bg-bora-black/60 text-bora-white/70 hover:text-bora-white border border-bora-orange/20 hover:border-bora-orange/50"
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-bora-black/60 text-bora-white/70 hover:text-bora-white border border-bora-orange/20 hover:border-bora-orange/50 hover:scale-105 transition-all duration-300"
           >
-            -
+            <span className="font-bebas">-</span>
           </button>
-          <span className="text-bora-white font-unbounded">{item.quantity}</span>
+          <span className="text-bora-white font-unbounded text-lg">{item.quantity}</span>
           <button 
             onClick={() => handleQuantityChange(item.quantity + 1)}
-            className="w-6 h-6 flex items-center justify-center rounded-full bg-bora-black/60 text-bora-white/70 hover:text-bora-white border border-bora-orange/20 hover:border-bora-orange/50"
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-bora-black/60 text-bora-white/70 hover:text-bora-white border border-bora-orange/20 hover:border-bora-orange/50 hover:scale-105 transition-all duration-300"
           >
-            +
+            <span className="font-bebas">+</span>
           </button>
         </div>
         
         <button 
           onClick={() => removeFromCart(item.id)}
-          className="text-xs text-bora-white/50 hover:text-bora-white font-unbounded"
+          className="text-sm text-bora-white/50 hover:text-bora-white font-unbounded hover:underline transition-colors duration-300"
         >
           Eliminar
         </button>
