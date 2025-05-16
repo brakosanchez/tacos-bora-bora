@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "headers": [
     {
       "source": "/(.*)",
@@ -20,6 +21,18 @@
           "value": "strict-origin-when-cross-origin"
         }
       ]
+    }
+  ],
+  "builds": [
+    {
+      "src": "next.config.js",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
     }
   ]
 }
