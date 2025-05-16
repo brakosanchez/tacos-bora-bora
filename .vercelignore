@@ -21,3 +21,10 @@ yarn.lock
 .idea
 .vscode
 *.tsbuildinfo
+**/node_modules
+**/dist
+**/build
+**/*.log
+**/*.swp
+**/*.swo
+**/*.tsbuildinfo
