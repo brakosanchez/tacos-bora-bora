@@ -72,8 +72,7 @@ export default function ContactoPage() {
 
                 <div>
                   <h2 className="font-bebas text-2xl text-bora-yellow mb-4">Contacto</h2>
-                  <p className="font-unbounded text-bora-white/90">Tel: (55) 1234-5678</p>
-                  <p className="font-unbounded text-bora-white/90">WhatsApp: (55) 8765-4321</p>
+                  <p className="font-unbounded text-bora-white/90">WhatsApp: (55) 4965-5305</p>
                 </div>
               </div>
 
@@ -167,13 +166,16 @@ export default function ContactoPage() {
             <div className="mt-12 text-center">
               <h2 className="font-yeseva text-2xl text-bora-yellow mb-4">Redes Sociales</h2>
               <div className="flex justify-center space-x-6">
-                <a href="#" className="text-bora-white/90 hover:text-bora-yellow transition-colors">
+                <a href="https://www.facebook.com/profile.php?id=100089760257006" target="_blank" rel="noopener noreferrer" className="text-bora-white/90 hover:text-bora-yellow transition-colors" onClick={(e) => {
+                  e.preventDefault();
+                  window.open('https://www.facebook.com/profile.php?id=100089760257006', '_blank');
+                }}>
                   Facebook
                 </a>
                 <a href="#" className="text-bora-white/90 hover:text-bora-yellow transition-colors">
                   Instagram
                 </a>
-                <a href="#" className="text-bora-white/90 hover:text-bora-yellow transition-colors">
+                <a href="https://wa.me/5549655305" target="_blank" rel="noopener noreferrer" className="text-bora-white/90 hover:text-bora-yellow transition-colors">
                   WhatsApp
                 </a>
               </div>
