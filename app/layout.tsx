@@ -5,6 +5,7 @@ import PageTransition from './components/PageTransition'
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import { Toaster } from 'react-hot-toast';
+import { LayoutClient } from './layout-client';
 
 const bebasNeue = Bebas_Neue({
   weight: '400',
@@ -58,31 +59,32 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className={`${bebasNeue.variable} ${yesevaOne.variable} ${unbounded.variable} font-sans antialiased relative`}>
-        <AuthProvider>
-          <CartProvider>
-            <div className="flex flex-col min-h-screen">
-              <Navbar />
-              <main className="flex-grow relative">
-                <PageTransition>
-                  {children}
-                </PageTransition>
-              </main>
-            </div>
-            <Toaster
-              position="top-center"
-              toastOptions={{
-                style: {
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(10px)',
-                  color: '#fff',
-                  border: '1px solid #F59E0B',
-                  borderRadius: '10px',
-                },
-              }}
-            />
-          </CartProvider>
-        </AuthProvider>
+      <body className={`${bebasNeue.variable} ${yesevaOne.variable} ${unbounded.variable} font-unbounded`}>
+        <LayoutClient>
+          <AuthProvider>
+            <CartProvider>
+              <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <main className="flex-grow relative">
+                  <PageTransition>
+                    {children}
+                  </PageTransition>
+                </main>
+              </div>
+            </CartProvider>
+          </AuthProvider>
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              style: {
+                background: '#1a1a1a',
+                color: '#fff',
+                borderRadius: '8px',
+                padding: '16px',
+              },
+            }}
+          />
+        </LayoutClient>
       </body>
     </html>
   )
