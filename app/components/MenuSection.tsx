@@ -13,7 +13,13 @@ interface MenuSectionProps {
   categoryColor?: string;
 }
 
-export default function MenuSection({ title, items, selectedSalsas, onAddToCart, categoryColor = 'bora-yellow' }: MenuSectionProps) {
+export default function MenuSection({ title, items, selectedSalsas, onAddToCart, categoryColor = 'orange-500' }: MenuSectionProps) {
+  const isDrinksSection = title.toLowerCase().includes('refrescos') || title.toLowerCase().includes('bebidas');
+  const isSalsasSection = title.toLowerCase().includes('salsas');
+  const isTacosSection = title.toLowerCase().includes('tacos');
+  const isEspecialidadesSection = title.toLowerCase().includes('especialidades');
+  
+  const getColor = () => categoryColor || 'orange-500';
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
   const handleItemClick = (itemId: string, category: string) => {
@@ -51,18 +57,19 @@ export default function MenuSection({ title, items, selectedSalsas, onAddToCart,
             onClick={() => handleItemClick(item.id, item.category)}
             className={`
               bg-bora-black/30 backdrop-blur-sm rounded-lg p-4 md:p-6 border cursor-pointer
-              ${selectedItem === item.id ? `border-${categoryColor} ring-2 ring-${categoryColor}` : 'border-bora-orange/20'} 
-              hover:border-${categoryColor} transition-all duration-200
+              ${selectedItem === item.id ? (isDrinksSection ? 'border-lime-500 ring-4 ring-lime-500 ring-offset-4 ring-offset-lime-500/10' : 'border-orange-500 ring-4 ring-orange-500 ring-offset-4 ring-offset-orange-500/10') : 'border-bora-orange/20'} 
+              hover:border-${isDrinksSection ? 'lime-500' : 'orange-500'} hover:ring-4 hover:ring-${isDrinksSection ? 'lime-500' : 'orange-500'} hover:ring-offset-4 ring-offset-${isDrinksSection ? 'lime-500' : 'orange-500'}/10 transition-all duration-300 ease-in-out
+              hover:shadow-${isDrinksSection ? 'lime-500' : 'orange-500'}/10
             `}
           >
             <div className="flex justify-between items-start mb-2">
               <h4 className="font-unbounded text-bora-white text-lg">{item.name}</h4>
-              <span className="font-bebas text-xl text-${categoryColor}">${item.price}</span>
+              <span className="font-bebas text-xl text-${isDrinksSection ? 'lime-500' : 'orange-500'}">${item.price}</span>
             </div>
             {item.description && (
               <p className="text-bora-white/70 text-sm mb-3">{item.description}</p>
             )}
-            <div className="mt-2 text-${categoryColor}/80 text-xs">
+            <div className="mt-2 text-${getColor()}/80 text-xs">
               {selectedSalsas.length > 0 ? (
                 <p>Con: {selectedSalsas.map(id => {
                   const salsa = salsas.find(s => s.id === id);

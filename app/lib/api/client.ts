@@ -1,5 +1,17 @@
 import { API_URL } from './config';
-import { getAccessToken } from '../auth';
+import { ApiResponse } from '@/types/api';
+
+// Función auxiliar para manejar las respuestas de la API
+const handleApiResponse = async <T>(response: Response): Promise<T> => {
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  const data = await response.json();
+  if (typeof data === 'object' && data !== null) {
+    return data as T;
+  }
+  throw new Error('Respuesta no válida del servidor');
+};
 
 export const api = {
   get: async <T>(endpoint: string, config = {}): Promise<T> => {
@@ -7,16 +19,10 @@ export const api = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        ...(await getAccessToken() ? { Authorization: `Bearer ${await getAccessToken()}` } : {}),
       },
       ...config,
     });
-
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
-    return response.json();
+    return handleApiResponse(response);
   },
 
   post: async <T>(endpoint: string, data: any = null, config = {}): Promise<T> => {
@@ -24,17 +30,11 @@ export const api = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        ...(await getAccessToken() ? { Authorization: `Bearer ${await getAccessToken()}` } : {}),
       },
       body: data ? JSON.stringify(data) : undefined,
       ...config,
     });
-
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
-    return response.json();
+    return handleApiResponse(response);
   },
 
   put: async <T>(endpoint: string, data: any = null, config = {}): Promise<T> => {
@@ -42,17 +42,11 @@ export const api = {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        ...(await getAccessToken() ? { Authorization: `Bearer ${await getAccessToken()}` } : {}),
       },
       body: data ? JSON.stringify(data) : undefined,
       ...config,
     });
-
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
-    return response.json();
+    return handleApiResponse(response);
   },
 
   delete: async <T>(endpoint: string, config = {}): Promise<T> => {
@@ -60,15 +54,9 @@ export const api = {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        ...(await getAccessToken() ? { Authorization: `Bearer ${await getAccessToken()}` } : {}),
       },
       ...config,
     });
-
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
-    return response.json();
+    return handleApiResponse(response);
   },
 };

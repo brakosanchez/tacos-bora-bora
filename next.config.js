@@ -2,8 +2,17 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['www.tacosborabora.com', 'tacos-bora-bora.vercel.app'],
+    domains: ['lh3.googleusercontent.com', 'graph.facebook.com', 'www.tacosborabora.com', 'tacos-bora-bora.vercel.app'],
     unoptimized: true
+  },
+  async redirects() {
+    return [
+      {
+        source: '/auth/login',
+        destination: '/api/auth/signin',
+        permanent: false,
+      },
+    ];
   },
   swcMinify: true,
   experimental: {

@@ -95,8 +95,8 @@ export default function Menu() {
                     text-sm px-4 py-2 rounded-full border 
                     transition-all duration-300 ease-in-out
                     ${selectedSalsas.includes(salsa.id) 
-                      ? 'bg-gradient-to-r from-red-600/40 via-orange-600/40 to-yellow-600/40 text-bora-white border-bora-orange shadow-lg shadow-orange-500/20' 
-                      : 'bg-bora-black/40 text-bora-white/70 border-bora-orange/20 hover:border-bora-orange/50 hover:bg-bora-orange/20'}
+                      ? 'bg-gradient-to-r from-red-600/60 via-red-500/60 to-red-400/60 text-bora-white border-red-500 shadow-lg shadow-red-500/30' 
+                      : 'bg-bora-black/40 text-bora-white/70 border-bora-orange/20 hover:border-red-500/50 hover:bg-red-500/20'}
                     ${selectedSalsas.includes(salsa.id) && 'animate-pulse'}
                   `}
                 >
@@ -113,6 +113,7 @@ export default function Menu() {
           items={menuItems.filter(item => item.category === 'Tacos')}
           selectedSalsas={selectedSalsas}
           onAddToCart={handleAddToCart}
+          categoryColor="orange-500"
         />
 
         {/* Especialidades Section */}
@@ -121,7 +122,7 @@ export default function Menu() {
           items={menuItems.filter(item => item.category === 'Especialidades')}
           selectedSalsas={selectedSalsas}
           onAddToCart={handleAddToCart}
-          categoryColor="cyan-400"
+          categoryColor="red-400"
         />
 
         {/* Extras Section */}
@@ -130,6 +131,7 @@ export default function Menu() {
           items={extras}
           selectedSalsas={selectedSalsas}
           onAddToCart={handleAddToCart}
+          categoryColor="orange-500"
         />
 
         {/* Refrescos Section */}
@@ -138,6 +140,7 @@ export default function Menu() {
           items={drinks}
           selectedSalsas={selectedSalsas}
           onAddToCart={handleAddToCart}
+          categoryColor="green-400"
         />
 
         {/* Salsas Section */}
@@ -146,6 +149,7 @@ export default function Menu() {
           items={salsasVenta}
           selectedSalsas={selectedSalsas}
           onAddToCart={handleAddToCart}
+          categoryColor="red-500"
         />
       </div>
     </section>
