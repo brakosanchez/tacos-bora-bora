@@ -1,30 +1,15 @@
 {
   "version": 2,
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
-  "env": {
-    "NODE_VERSION": "18"
-  },
   "builds": [
     {
       "src": "next.config.js",
       "use": "@vercel/next"
     }
   ],
-  "functions": {
-    "api/**": {
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/:path*",
-      "destination": "/api/:path*"
+      "src": "/(.*)",
+      "dest": "/$1"
     }
   ]
 }
