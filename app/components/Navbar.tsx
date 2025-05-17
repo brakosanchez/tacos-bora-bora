@@ -31,7 +31,7 @@ function Navbar() {
               <img 
                 src="/images/logoSolo.png" 
                 alt="Tacos Bora Bora" 
-                className="h-8 w-auto"
+                className="h-12 w-12 object-contain"
               />
               <span className="text-bora-yellow font-bebas text-2xl hover:text-yellow-500 transition-colors tracking-wider">
                 Tacos Bora Bora
