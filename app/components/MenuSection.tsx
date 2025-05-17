@@ -5,6 +5,41 @@ import { useCart } from '../context/CartContext';
 import FireTitle from './FireTitle';
 import { salsas } from './Menu';
 
+interface ProductImages {
+  [key: string]: string;
+}
+
+// Mapeo de nombres específicos a sus imágenes
+const productImages: ProductImages = {
+  // Bebidas
+  'Topo Chico': 'topo100',
+  'Coca Cola': 'coca100',
+  'Boing Mango': 'boing100',
+  'Boing Guayaba': 'boing100',
+  'Mundet Manzana': 'mundet100',
+  'Fanta': 'fanta100',
+  'Sprite': 'sprite100',
+  'Delaware Punch': 'dela100',
+
+  // Tacos
+  'Bistec': 'bistec100',
+  'Longaniza': 'longaniza100',
+  'Pollo': 'pollo100',
+  'Aguja Norteña': 'aguja100',
+  'Campechano': 'campebistec100',
+  'Mixiote': 'mixiote100',
+
+  // Especialidades
+  'Cecina': 'cecina100',
+  'Arrachera': 'arrachera100',
+  'Kilo de Mixiote': 'mixiotekilo100',
+
+  // Extras
+  'Queso': 'queso100',
+  'Consomé': 'consome100',
+  'Consomé (1 litro)': 'litro100'
+};
+
 interface MenuSectionProps {
   title: string;
   items: Array<{ id: string; name: string; price: number; description?: string; category: string }>;
@@ -63,7 +98,23 @@ export default function MenuSection({ title, items, selectedSalsas, onAddToCart,
             `}
           >
             <div className="flex justify-between items-start mb-2">
-              <h4 className="font-unbounded text-bora-white text-lg">{item.name}</h4>
+              <div className="flex items-center gap-2">
+                <img 
+                  src={`/images/productos/${
+                    (productImages[item.name] || 
+                    item.name.toLowerCase()
+                      .replace(/[^a-z0-9]/g, '')
+                      .replace(/\s+/g, ''))
+                  }.png`} 
+                  alt={item.name}
+                  className="w-8 h-8 object-contain"
+                  onError={(e) => {
+                    const img = e.target as HTMLImageElement;
+                    img.src = '/images/productos/aguja100.png'; // Imagen por defecto
+                  }}
+                />
+                <h4 className="font-unbounded text-bora-white text-lg">{item.name}</h4>
+              </div>
               <span className="font-bebas text-xl text-${isDrinksSection ? 'lime-500' : 'orange-500'}">${item.price}</span>
             </div>
             {item.description && (
