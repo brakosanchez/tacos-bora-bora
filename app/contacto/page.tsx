@@ -172,7 +172,10 @@ export default function ContactoPage() {
                 }}>
                   Facebook
                 </a>
-                <a href="#" className="text-bora-white/90 hover:text-bora-yellow transition-colors">
+                <a href="https://www.instagram.com/tacosborabora" target="_blank" rel="noopener noreferrer" className="text-bora-white/90 hover:text-bora-yellow transition-colors" onClick={(e) => {
+                  e.preventDefault();
+                  window.open('https://www.instagram.com/tacosborabora', '_blank');
+                }}>
                   Instagram
                 </a>
                 <a href="https://wa.me/5549655305" target="_blank" rel="noopener noreferrer" className="text-bora-white/90 hover:text-bora-yellow transition-colors">
