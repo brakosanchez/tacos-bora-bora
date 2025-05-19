@@ -7,7 +7,7 @@ export interface CartItem {
   name: string;
   price: number;
   quantity: number;
-  category: string;
+  category: 'Tacos' | 'Salsas' | 'Bebidas';
   salsas?: string[];
 }
 
@@ -15,6 +15,7 @@ interface CartContextType {
   items: CartItem[];
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: string) => void;
+  removeItem: (id: string) => void;
   clearCart: () => void;
   updateQuantity: (id: string, quantity: number) => void;
   totalItems: number;
@@ -46,8 +47,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const removeFromCart = (id: string) => {
+  const removeItem = (id: string) => {
     setItems(prevItems => prevItems.filter(item => item.id !== id));
+  };
+
+  const removeFromCart = (id: string) => {
+    removeItem(id);
   };
 
   const clearCart = () => {
@@ -55,11 +60,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   const updateQuantity = (id: string, quantity: number) => {
-    setItems(prevItems => 
-      prevItems.map(item => 
-        item.id === id ? { ...item, quantity } : item
-      )
-    );
+    setItems(prevItems => {
+      const updatedItems = [...prevItems];
+      const itemIndex = updatedItems.findIndex(item => item.id === id);
+      if (itemIndex >= 0) {
+        updatedItems[itemIndex].quantity = quantity;
+      }
+      return updatedItems;
+    });
   };
 
   const totalItems = items.reduce((total, item) => total + item.quantity, 0);
@@ -74,10 +82,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
       items,
       addToCart,
       removeFromCart,
+      removeItem,
       clearCart,
       updateQuantity,
-      totalItems,
-      totalPrice
+      totalItems: items.reduce((total, item) => total + item.quantity, 0),
+      totalPrice: items.reduce((total, item) => total + (item.price * item.quantity), 0)
     }}>
       {children}
     </CartContext.Provider>

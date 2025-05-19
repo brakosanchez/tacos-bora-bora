@@ -1,6 +1,7 @@
 'use client';
 
 import { useCart, CartItem as CartItemType } from '../context/CartContext';
+import { salsas } from './Menu';
 
 interface CartItemProps {
   item: CartItemType;
@@ -18,17 +19,19 @@ export default function CartItem({ item }: CartItemProps) {
   };
 
   return (
-    <div className="flex flex-col bg-bora-black/40 rounded-xl p-6 border border-bora-orange/10 hover:border-bora-orange/20 transition-all duration-300">
+    <div className="flex flex-col bg-bora-black/40 rounded-xl p-6 border border-bora-orange/20 hover:border-bora-orange/40 transition-all duration-300 shadow-md hover:shadow-lg">
       <div className="flex justify-between items-start mb-4">
         <div>
           <h4 className="font-bebas text-xl text-bora-yellow">{item.name}</h4>
           {item.salsas && item.salsas.length > 0 && (
             <p className="text-bora-orange/80 text-sm mt-2 font-unbounded">
-              <span className="text-bora-white/70">Salsas:</span> {item.salsas.join(', ')}
+              <span className="text-bora-white/70">Salsas:</span> {item.salsas
+                .map(salsaId => salsas.find(s => s.id === salsaId)?.name || salsaId)
+                .join(', ')}
             </p>
           )}
         </div>
-        <span className="font-bebas text-xl text-bora-yellow">${item.price * item.quantity}</span>
+        <span className="font-bebas text-2xl text-bora-yellow">${item.price * item.quantity}</span>
       </div>
       
       <div className="flex justify-between items-center mt-4">
@@ -39,7 +42,7 @@ export default function CartItem({ item }: CartItemProps) {
           >
             <span className="font-bebas">-</span>
           </button>
-          <span className="text-bora-white font-unbounded text-lg">{item.quantity}</span>
+          <span className="text-bora-white font-unbounded text-xl">{item.quantity}</span>
           <button 
             onClick={() => handleQuantityChange(item.quantity + 1)}
             className="w-8 h-8 flex items-center justify-center rounded-full bg-bora-black/60 text-bora-white/70 hover:text-bora-white border border-bora-orange/20 hover:border-bora-orange/50 hover:scale-105 transition-all duration-300"

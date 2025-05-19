@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useCart } from '../context/CartContext';
 import FireTitle from './FireTitle';
 import { salsas } from './Menu';
@@ -37,18 +38,24 @@ const productImages: ProductImages = {
   // Extras
   'Queso': 'queso100',
   'Consomé': 'consome100',
-  'Consomé (1 litro)': 'litro100'
+  'Consomé (1 litro)': 'litro100',
+
+  // Salsas de venta
+  'Salsa Verde (4oz)': 'salsaverde4oz',
+  'Salsa Roja (4oz)': 'salsaroja4oz',
+  'Salsa de Habanero (4oz)': 'salsadehabanero4oz',
+  'Chimichurri (4oz)': 'chimichurri4oz'
 };
 
 interface MenuSectionProps {
   title: string;
-  items: Array<{ id: string; name: string; price: number; description?: string; category: string }>;
-  selectedSalsas: string[];
+  items: Array<{ id: string; name: string; price: number; description?: string; category: string; image?: string }>;
   onAddToCart: (item: any) => void;
   categoryColor?: string;
+  isSalsaRestricted?: boolean;
 }
 
-export default function MenuSection({ title, items, selectedSalsas, onAddToCart, categoryColor = 'orange-500' }: MenuSectionProps) {
+export default function MenuSection({ title, items, onAddToCart, categoryColor = 'orange-500', isSalsaRestricted = false }: MenuSectionProps) {
   const isDrinksSection = title.toLowerCase().includes('refrescos') || title.toLowerCase().includes('bebidas');
   const isSalsasSection = title.toLowerCase().includes('salsas');
   const isTacosSection = title.toLowerCase().includes('tacos');
@@ -57,23 +64,29 @@ export default function MenuSection({ title, items, selectedSalsas, onAddToCart,
   const getColor = () => categoryColor || 'orange-500';
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
-  const handleItemClick = (itemId: string, category: string) => {
+  const handleItemClick = (itemId: string, category: string, item: any) => {
     setSelectedItem(itemId);
     
-    const item = items.find(item => item.id === itemId);
-    if (item) {
-      onAddToCart({
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        quantity: 1,
-        category: item.category,
-        salsas: category === 'Salsas' ? [] : selectedSalsas.map(id => {
-          const salsa = salsas.find(s => s.id === id);
-          return salsa ? salsa.name : '';
-        }).filter(Boolean)
-      });
+    // Si es una salsa y hay restricción, limitar la selección
+    if (category === 'Salsas' && isSalsaRestricted) {
+      toast.error('Solo se permiten hasta 3 salsas para pedidos menores a $150 y de 5 tacos o menos');
+      return;
     }
+    
+    // Agregar el item al carrito
+    const salsasToAdd = item.name === 'Kilo de Mixiote' 
+      ? salsas
+          .filter(salsa => salsa.id !== 's7' && salsa.id !== 's8') // Excluye salsa de habanero (s7) y chimichurri (s8)
+          .map(salsa => salsa.name)
+      : []; // Ahora guardamos los nombres en lugar de los IDs
+    onAddToCart({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      quantity: 1,
+      category: item.category,
+      salsas: salsasToAdd
+    });
     
     setTimeout(() => {
       setSelectedItem(null);
@@ -89,7 +102,7 @@ export default function MenuSection({ title, items, selectedSalsas, onAddToCart,
         {items.map((item) => (
           <div 
             key={item.id} 
-            onClick={() => handleItemClick(item.id, item.category)}
+            onClick={() => handleItemClick(item.id, item.category, item)}
             className={`
               bg-bora-black/30 backdrop-blur-sm rounded-lg p-4 md:p-6 border cursor-pointer
               ${selectedItem === item.id ? (isDrinksSection ? 'border-lime-500 ring-4 ring-lime-500 ring-offset-4 ring-offset-lime-500/10' : 'border-orange-500 ring-4 ring-orange-500 ring-offset-4 ring-offset-orange-500/10') : 'border-bora-orange/20'} 
@@ -100,17 +113,16 @@ export default function MenuSection({ title, items, selectedSalsas, onAddToCart,
             <div className="flex justify-between items-start mb-2">
               <div className="flex items-center gap-2">
                 <img 
-                  src={`/images/productos/${
-                    (productImages[item.name] || 
-                    item.name.toLowerCase()
-                      .replace(/[^a-z0-9]/g, '')
-                      .replace(/\s+/g, ''))
-                  }.png`} 
+                  src={
+                    item.image 
+                      ? `/images/productos/${item.image}.png`
+                      : '/images/productos/aguja100.png'
+                  }
                   alt={item.name}
                   className="w-8 h-8 object-contain"
                   onError={(e) => {
                     const img = e.target as HTMLImageElement;
-                    img.src = '/images/productos/aguja100.png'; // Imagen por defecto
+                    img.src = '/images/productos/aguja100.png';
                   }}
                 />
                 <h4 className="font-unbounded text-bora-white text-lg">{item.name}</h4>
@@ -120,16 +132,6 @@ export default function MenuSection({ title, items, selectedSalsas, onAddToCart,
             {item.description && (
               <p className="text-bora-white/70 text-sm mb-3">{item.description}</p>
             )}
-            <div className="mt-2 text-${getColor()}/80 text-xs">
-              {selectedSalsas.length > 0 ? (
-                <p>Con: {selectedSalsas.map(id => {
-                  const salsa = salsas.find(s => s.id === id);
-                  return salsa ? salsa.name : '';
-                }).join(', ')}</p>
-              ) : (
-                <p>Haz clic para agregar al pedido</p>
-              )}
-            </div>
           </div>
         ))}
       </div>

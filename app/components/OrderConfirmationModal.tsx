@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { Geolocation } from '../types';
 import { toast } from 'react-hot-toast';
@@ -8,14 +8,37 @@ import { toast } from 'react-hot-toast';
 interface OrderConfirmationModalProps {
   isOpen: boolean;
   onClose: () => void;
+  deliveryAddress: string;
+  showLocationButton?: boolean;
+  isReviewingOrder?: boolean;
 }
 
-export default function OrderConfirmationModal({ isOpen, onClose }: OrderConfirmationModalProps) {
+export default function OrderConfirmationModal({ isOpen, onClose, deliveryAddress, showLocationButton = true, isReviewingOrder = false }: OrderConfirmationModalProps) {
   const { items, totalPrice, clearCart } = useCart();
   const [paymentMethod, setPaymentMethod] = useState('efectivo');
-  const [address, setAddress] = useState('');
   const [locationPermission, setLocationPermission] = useState<'granted' | 'denied' | 'not_requested'>('not_requested');
   const [userLocation, setUserLocation] = useState<Geolocation | null>(null);
+
+  // Solo inicializar la geolocalización si no estamos revisando el pedido
+  useEffect(() => {
+    if (!isReviewingOrder) {
+      // Inicializar geolocalización solo cuando sea necesario
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setLocationPermission('granted');
+            setUserLocation({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            });
+          },
+          () => {
+            setLocationPermission('denied');
+          }
+        );
+      }
+    }
+  }, [isReviewingOrder]);
 
   const paymentOptions = [
     { value: 'efectivo', label: 'Efectivo' },
@@ -126,25 +149,23 @@ export default function OrderConfirmationModal({ isOpen, onClose }: OrderConfirm
         {/* Dirección */}
         <div className="mb-6">
           <label className="block text-bora-white/80 font-unbounded mb-2">Dirección de Entrega</label>
-          <div className="flex flex-col space-y-2">
-            <input
-              type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="Escribe tu dirección..."
-              className="w-full bg-bora-black/40 border border-bora-orange/20 rounded-lg p-3 text-bora-white/80 font-unbounded"
-            />
-            <button
-              onClick={handleLocationPermission}
-              className="w-full text-center text-bora-white/70 hover:text-bora-white px-4 py-2 rounded-full border border-bora-orange/20 hover:border-bora-orange/50 transition-all duration-300 hover:scale-105"
-            >
-              {locationPermission === 'not_requested'
-                ? 'Usar mi ubicación actual'
-                : locationPermission === 'granted'
-                ? 'Ubicación obtenida correctamente'
-                : 'Permisos denegados'}
-            </button>
+          <div className="p-4 bg-bora-black/40 rounded-lg">
+            <p className="text-bora-white/80 break-words whitespace-pre-wrap">{deliveryAddress}</p>
           </div>
+          {showLocationButton && (
+            <div className="mt-4">
+              <button
+                onClick={handleLocationPermission}
+                className="w-full text-center text-bora-white/70 hover:text-bora-white px-4 py-2 rounded-full border border-bora-orange/20 hover:border-bora-orange/50 transition-all duration-300 hover:scale-105"
+              >
+                {locationPermission === 'not_requested'
+                  ? 'Usar mi ubicación actual'
+                  : locationPermission === 'granted'
+                  ? 'Ubicación obtenida correctamente'
+                  : 'Permisos denegados'}
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Mensaje de tiempo de entrega */}

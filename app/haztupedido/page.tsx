@@ -1,11 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import Menu from '../components/Menu';
 import Background from '../components/Background';
-import Cart from '../components/Cart';
 import FireTitle from '../components/FireTitle';
 
 export default function HazTuPedidoPage() {
+  const [isSalsaRestricted, setIsSalsaRestricted] = useState(false);
+
   return (
     <main className="min-h-screen bg-bora-black">
       <div className="relative pt-20">
@@ -18,10 +20,7 @@ export default function HazTuPedidoPage() {
         <Background />
         
         {/* Menu */}
-        <Menu />
-        
-        {/* Cart */}
-        <Cart />
+        <Menu isSalsaRestricted={isSalsaRestricted} />
       </div>
     </main>
   );
